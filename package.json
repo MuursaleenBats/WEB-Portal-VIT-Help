@@ -1,25 +1,17 @@
 {
   "name": "VIT-Help",
   "version": "1.1.0",
-  "author": "Creative Tim",
+  "author": "Internship Group",
   "license": "MIT",
   "proxy": "http://localhost:8080",
-  "homepage": "https://demos.creative-tim.com/nextjs-argon-dashboard/",
-  "description": "NextJS version of Argon Dashboard React by Creative Tim",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/nextjs-argon-dashboard/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/creativetimofficial/nextjs-argon-dashboard.git"
-  },
+  "description": "WEB PORTAL For VIT-Help",
   "scripts": {
     "start": "next start",
     "build": "next build",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -rf .next/ && rm -rf out/ && npm install && npm run dev",
-    "compile:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/nextjs-argon-dashboard.scss assets/css/nextjs-argon-dashboard.css",
-    "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/nextjs-argon-dashboard.scss assets/css/nextjs-argon-dashboard.min.css --output-style compressed",
-    "map:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/nextjs-argon-dashboard.scss assets/css/nextjs-argon-dashboard.css --source-map true",
+    "compile:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/dashboard.scss assets/css/dashboard.css",
+    "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/dashboard.scss assets/css/dashboard.min.css --output-style compressed",
+    "map:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/dashboard.scss assets/css/dashboard.css --source-map true",
     "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss",
     "dev": "next dev"
   },
