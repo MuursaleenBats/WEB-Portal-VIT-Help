@@ -80,4 +80,10 @@ enterpriseVolunteerData: [
 }
 
 ],
+enterpriseProfileData : {
+
+  organizationName: "ORG_NAME",
+  addressOfOrganization: "ADD_ORG",
+  typeOfOrganization: "TYPE_ORG",
+},
 };

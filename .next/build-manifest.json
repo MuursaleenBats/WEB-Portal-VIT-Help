@@ -26,15 +26,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/enterprise/dashboard": [
+    "/enterprise/profile": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/dashboard.js"
-    ],
-    "/enterprise/login": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/login.js"
+      "static/chunks/pages/enterprise/profile.js"
     ]
   },
   "ampFirstPages": []

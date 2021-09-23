@@ -157,6 +157,55 @@ const Organizations = ({sam}) => {
 
                     <Button outline
                     onClick={() => setModalDefaultOpen(true)}
+                    color="success" type="button">
+                            Update Details
+                          </Button>
+                          <Modal
+                    isOpen={modalDefaultOpen}
+                    toggle={() => setModalDefaultOpen(false)}
+                    >
+                    <div className=" modal-header">
+                      <h6 className=" modal-title" id="modal-title-default">
+                      Volunteer Name Here
+                      </h6>
+                      <button
+                        aria-label="Close"
+                        className=" close"
+                        onClick={() => setModalDefaultOpen(false)}
+                        type="button"
+                      >
+                        <span aria-hidden={true}>×</span>
+                      </button>
+                    </div>
+                    <div className=" modal-body">
+                      <p>
+                        \\---  Volunteer Details  ---//
+                      </p>
+                      <p>
+                      \\---  Volunteer Details  ---//
+                      </p>
+
+                    </div>
+                    <div className=" modal-footer">
+                      <Button color="primary" type="button">
+                        Document if any
+                      </Button>
+                      <Button
+                        className=" ml-auto"
+                        color="link"
+                        onClick={() => setModalDefaultOpen(false)}
+                        type="button"
+                      >
+                        Close
+                      </Button>
+                    </div>
+                    </Modal>
+                    </td>
+
+                    <td>
+
+                    <Button outline
+                    onClick={() => setModalDefaultOpen(true)}
                     color="primary" type="button">
                             Show Details
                           </Button>

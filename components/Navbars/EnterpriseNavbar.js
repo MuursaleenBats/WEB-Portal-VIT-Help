@@ -74,7 +74,10 @@ function EnterpriseNavbar({ brandText }) {
               </DropdownToggle>
               <DropdownMenu className="dropdown-menu-arrow" right>
 
-
+              <DropdownItem href="./profile" >
+                <i className="ni ni-single-02 text-grey" />
+                <span>View Profile</span>
+              </DropdownItem>
 
                 <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />

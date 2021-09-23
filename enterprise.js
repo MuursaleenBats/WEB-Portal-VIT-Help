@@ -5,6 +5,12 @@ var routes = [
     icon: "ni ni-tv-2 text-primary",
     layout: "/enterprise",
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    icon: "ni ni-single-02 text-black",
+    layout: "/enterprise",
+  },
   /*{
     path: "/icons",
     name: "Icons",
