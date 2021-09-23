@@ -62,7 +62,12 @@ const Profile = ({sam}) => {
             <Label for="exampleAddress">Address</Label>
             <Input defaultValue={Data.enterpriseProfileData.typeOfOrganization} type="text" name="address" id="addressOfOrganization" placeholder="Address Of Organization"/>
           </FormGroup>
-
+          <Button
+            color="warning"
+            type="button"
+          >
+            Update Details
+          </Button>
         </Form>
     </>
   );
