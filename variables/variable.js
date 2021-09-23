@@ -80,6 +80,15 @@ enterpriseVolunteerData: [
 }
 
 ],
+enterpriseVolunteerFullData : {
+
+  "volunteerId" : 1,
+  "volunteerName" : "NAME_V",
+  "volunteerPhoneNumber" : "+91 1000100011",
+  "volunteerDOB" : 25,
+  "volunteerAddress" : "ABC STATE",
+  "casesSolved" : 100,
+},
 enterpriseProfileData : {
 
   organizationName: "ORG_NAME",

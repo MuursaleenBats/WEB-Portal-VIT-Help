@@ -41,6 +41,10 @@ import Header from "components/Headers/EnterpriseHeader.js";
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
  const [modalFormOpen, setModalFormOpen] = React.useState(false);
+ const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
+ const [modalShowOpen, setModalShowOpen] = React.useState(false);
+
+
   return (
     <>
       <Header />
@@ -155,102 +159,166 @@ const Organizations = ({sam}) => {
 
                     <td>
 
-                    <Button outline
-                    onClick={() => setModalDefaultOpen(true)}
-                    color="success" type="button">
-                            Update Details
-                          </Button>
-                          <Modal
-                    isOpen={modalDefaultOpen}
-                    toggle={() => setModalDefaultOpen(false)}
-                    >
-                    <div className=" modal-header">
-                      <h6 className=" modal-title" id="modal-title-default">
-                      Volunteer Name Here
-                      </h6>
-                      <button
-                        aria-label="Close"
-                        className=" close"
-                        onClick={() => setModalDefaultOpen(false)}
-                        type="button"
-                      >
-                        <span aria-hidden={true}>×</span>
-                      </button>
-                    </div>
-                    <div className=" modal-body">
-                      <p>
-                        \\---  Volunteer Details  ---//
-                      </p>
-                      <p>
-                      \\---  Volunteer Details  ---//
-                      </p>
 
-                    </div>
-                    <div className=" modal-footer">
-                      <Button color="primary" type="button">
-                        Document if any
-                      </Button>
-                      <Button
-                        className=" ml-auto"
-                        color="link"
-                        onClick={() => setModalDefaultOpen(false)}
-                        type="button"
-                      >
-                        Close
-                      </Button>
-                    </div>
-                    </Modal>
-                    </td>
-
-                    <td>
 
                     <Button outline
-                    onClick={() => setModalDefaultOpen(true)}
+                    onClick={() => setModalShowOpen(true)}
                     color="primary" type="button">
                             Show Details
                           </Button>
-                          <Modal
-                    isOpen={modalDefaultOpen}
-                    toggle={() => setModalDefaultOpen(false)}
-                    >
-                    <div className=" modal-header">
-                      <h6 className=" modal-title" id="modal-title-default">
-                      Volunteer Name Here
-                      </h6>
-                      <button
-                        aria-label="Close"
-                        className=" close"
-                        onClick={() => setModalDefaultOpen(false)}
-                        type="button"
-                      >
-                        <span aria-hidden={true}>×</span>
-                      </button>
-                    </div>
-                    <div className=" modal-body">
-                      <p>
-                        \\---  Volunteer Details  ---//
-                      </p>
-                      <p>
-                      \\---  Volunteer Details  ---//
-                      </p>
+                          <Modal isOpen={modalShowOpen} toggle={() => setModalShowOpen(false)}>
+                          <div className=" modal-body p-0">
+                          <Card className=" bg-secondary shadow border-0">
+                          <CardHeader className=" bg-white pb-5">
+                          <div className="text-center">
+                          <small>Volunteer Details</small>
+                          </div>
 
+                          </CardHeader>
+                          <CardBody className=" px-lg-5 py-lg-5">
+
+                          <Form role="form">
+                          <FormGroup className=" mb-3">
+                          <InputGroup className=" input-group-alternative">
+                          <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                          <i className=" ni ni-circle-08"></i>
+                          </InputGroupText>
+                          </InputGroupAddon>
+                          <Input placeholder="Name" type="text"></Input>
+                          </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                          <InputGroup className=" input-group-alternative">
+                          <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                          <i className=" ni ni-mobile-button"></i>
+                          </InputGroupText>
+                          </InputGroupAddon>
+                          <Input placeholder="Phone Number" type="tel"></Input>
+                          </InputGroup>
+                          </FormGroup>
+                          <FormGroup>
+                          <label className=" form-control-label" htmlFor="example-date-input">
+                          Date of Birth
+                          </label>
+                          <Input
+
+                          id="example-date-input"
+                          type="date"
+                          ></Input>
+                          </FormGroup>
+                          <FormGroup className=" mb-3">
+                          <InputGroup className=" input-group-alternative">
+                          <InputGroupAddon addonType="prepend">
+                          <InputGroupText>
+                          <i className=" ni ni-square-pin"></i>
+                          </InputGroupText>
+                          </InputGroupAddon>
+                          <Input placeholder="Address" type="text"></Input>
+                          </InputGroup>
+                          </FormGroup>
+                          <div className=" custom-file">
+                          <input
+                          className=" custom-file-input"
+                          id="customFileLang"
+                          lang="en"
+                          type="file"
+                          ></input>
+                          <label className=" custom-file-label" htmlFor="customFileLang">
+                          File If Any
+                          </label>
+                          </div>
+                          <div className=" text-center">
+
+                          </div>
+                          </Form>
+                          </CardBody>
+                          </Card>
+                          </div>
+                          </Modal>
+                    </td>
+                    <td>
+
+                    <Button outline
+                    onClick={() => setModalUpdateOpen(true)}
+                    color="success" type="button">
+                    Update Details
+                    </Button>
+                    <Modal isOpen={modalUpdateOpen} toggle={() => setModalUpdateOpen(false)}>
+                    <div className=" modal-body p-0">
+                    <Card className=" bg-secondary shadow border-0">
+                    <CardHeader className=" bg-white pb-5">
+                    <div className="text-center">
+                    <small>Update Volunteer Details</small>
                     </div>
-                    <div className=" modal-footer">
-                      <Button color="primary" type="button">
-                        Document if any
-                      </Button>
-                      <Button
-                        className=" ml-auto"
-                        color="link"
-                        onClick={() => setModalDefaultOpen(false)}
-                        type="button"
-                      >
-                        Close
-                      </Button>
+
+                    </CardHeader>
+                    <CardBody className=" px-lg-5 py-lg-5">
+
+                    <Form role="form">
+                    <FormGroup className=" mb-3">
+                    <InputGroup className=" input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                    <i className=" ni ni-circle-08"></i>
+                    </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="Name" type="text"></Input>
+                    </InputGroup>
+                    </FormGroup>
+                    <FormGroup>
+                    <InputGroup className=" input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                    <i className=" ni ni-mobile-button"></i>
+                    </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="Phone Number" type="tel"></Input>
+                    </InputGroup>
+                    </FormGroup>
+                    <FormGroup>
+                    <label className=" form-control-label" htmlFor="example-date-input">
+                    Date of Birth
+                    </label>
+                    <Input
+
+                    id="example-date-input"
+                    type="date"
+                    ></Input>
+                    </FormGroup>
+                    <FormGroup className=" mb-3">
+                    <InputGroup className=" input-group-alternative">
+                    <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                    <i className=" ni ni-square-pin"></i>
+                    </InputGroupText>
+                    </InputGroupAddon>
+                    <Input placeholder="Address" type="text"></Input>
+                    </InputGroup>
+                    </FormGroup>
+                    <div className=" custom-file">
+                    <input
+                    className=" custom-file-input"
+                    id="customFileLang"
+                    lang="en"
+                    type="file"
+                    ></input>
+                    <label className=" custom-file-label" htmlFor="customFileLang">
+                    File If Any
+                    </label>
+                    </div>
+                    <div className=" text-center">
+                    <Button className=" my-4" color="warning" type="button">
+                    Update
+                    </Button>
+                    </div>
+                    </Form>
+                    </CardBody>
+                    </Card>
                     </div>
                     </Modal>
                     </td>
-
 
 
 
