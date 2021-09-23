@@ -17,8 +17,31 @@ import {
 } from "reactstrap";
 // layout for this page
 import Auth from "layouts/Auth.js";
+import axios from "axios";
 
 function Login() {
+  const handleSubmit = async (event) =>{
+    event.preventDefault();
+      const postData = {
+      phoneNumber: parseInt(event.target[0].value),
+      password: event.target[1].value
+    }
+    const getResponse = await axios.get(`http://localhost:3001/data/admin/${postData.phoneNumber}`);
+    console.log(getResponse.data);
+     if(getResponse.data[0] === undefined){
+       alert("Admin Phine Number is not valid ");
+     }
+     else{
+       if(getResponse.data[0].pass != postData.password){
+           alert("Invalid Credentials");
+        
+       }
+       else{
+        window.location.href="/admin/dashboard";
+       }
+    }
+  }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -30,7 +53,7 @@ function Login() {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
 
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -71,8 +94,8 @@ function Login() {
               </div>
               <div className="text-center">
                 <Button
-                href="/admin/dashboard"
-                className="my-4" color="primary" type="button">
+                //href="/admin/dashboard"
+                className="my-4" color="primary" type="submit">
                   Sign in
                 </Button>
               </div>

@@ -17,8 +17,41 @@ import {
 } from "reactstrap";
 // layout for this page
 import Auth from "layouts/Auth.js";
+import axios from "axios";
 
 function Login() {
+
+  const handleSubmit = async (event) =>{
+    event.preventDefault();
+      const postData = {
+      phoneNumber: parseInt(event.target[0].value),
+      password: event.target[1].value
+    }
+    const getResponse = await axios.get(`http://localhost:3001/data/enterprise/${postData.phoneNumber}`);
+    console.log(getResponse.data);
+    if(getResponse.data === undefined){
+      alert("Enterprise does not exist. Please register ");
+    }
+    else{
+      if(getResponse.data.password != postData.password){
+          alert("Invalid Credentials");
+        
+      }
+      else{
+        // alert("good");
+        
+        localStorage.setItem("vh-org", JSON.stringify(getResponse.data));
+
+        // var org = JSON.parse(localStorage.getItem("vh-org"));
+        // org.Name
+
+        // localStorage.removeItem("vh-org");
+
+        window.location.href="/enterprise/dashboard";
+      }
+    }
+  }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -30,7 +63,7 @@ function Login() {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
 
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -71,8 +104,8 @@ function Login() {
               </div>
               <div className="text-center">
                 <Button
-                href="/enterprise/dashboard"
-                className="my-4" color="primary" type="button">
+                //href="/enterprise/dashboard"
+                className="my-4" color="primary" type="submit">
                   Sign in
                 </Button>
               </div>

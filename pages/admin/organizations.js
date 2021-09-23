@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Button } from "reactstrap";
 import Data from "variables/variable.js";
 
-
+import axios from "axios";
 // reactstrap components
 import {
   Badge,
@@ -34,6 +34,12 @@ import Header from "components/Headers/Header.js";
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
+  const [orgData, setOrgData] = React.useState(undefined);
+  
+  React.useEffect(async () => {
+    const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgData");
+    setOrgData(orgDataGetResponse.data);
+  }, []);
   return (
     <>
       <Header />
@@ -59,15 +65,13 @@ const Organizations = ({sam}) => {
                   </tr>
                 </thead>
                 <tbody>
-                {Data.adminOrganizationData.map(reqDataP => (
-                  <tr key={reqDataP.organizationId}>
-                    <td >{reqDataP.organizationId}</td>
-                    <td >{reqDataP.nameOfOrganization}</td>
-                    <td >{reqDataP.typeOfOrganization}</td>
-                    <td >{reqDataP.noOfVolunteers}</td>
-
+                {orgData && orgData.map(orgdata => (
+                    <tr key={orgdata.Id}>
+                    <td >{orgdata.Id}</td>
+                    <td >{orgdata.NameofOrg}</td>
+                    <td >{"ORG TYPE"}</td>
+                    <td >{"0"}</td>
                     <td>
-
                     <Button outline
                     onClick={() => setModalDefaultOpen(true)}
                     color="primary" type="button">
@@ -79,7 +83,7 @@ const Organizations = ({sam}) => {
                     >
                     <div className=" modal-header">
                       <h6 className=" modal-title" id="modal-title-default">
-                      Organizations Name Here
+                      {orgData.NameofOrg}
                       </h6>
                       <button
                         aria-label="Close"
@@ -92,10 +96,13 @@ const Organizations = ({sam}) => {
                     </div>
                     <div className=" modal-body">
                       <p>
-                        \\---  Organizations Details  ---//
+                        {/* \\---  Organizations Details  ---// */}
                       </p>
                       <p>
-                      \\---  Organizations Details  ---//
+                      Id: {orgdata.Id}<br/>
+                      Name: {orgdata.NameofOrg}<br/>
+                      Email: {orgdata.Email}<br/>
+                      Phone Number: {orgdata.phoneNumber}<br/>
                       </p>
 
                     </div>

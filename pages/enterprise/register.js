@@ -17,8 +17,21 @@ import {
 } from "reactstrap";
 // layout for this page
 import Auth from "layouts/Auth.js";
+import axios from "axios";
 
 function Register() {
+  const handleSubmit = async (event) =>{
+    event.preventDefault();
+    console.log(event);
+    const postData = {
+      NameofOrg:  event.target[0].value,
+      Email: event.target[1].value,
+      phoneNumber: parseInt(event.target[2].value),
+      password: event.target[3].value
+    } 
+    const postResponse = await axios.post("http://localhost:3001/data/enterprise", postData);
+    console.log(postResponse.data);
+  }
   return (
     <>
       <Col lg="6" md="8">
@@ -31,7 +44,7 @@ function Register() {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
 
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">
@@ -99,7 +112,7 @@ function Register() {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" type="button">
+                <Button className="mt-4" color="primary" type="submit">
                   Create account
                 </Button>
               </div>

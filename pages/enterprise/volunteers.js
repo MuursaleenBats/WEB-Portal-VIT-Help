@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Button } from "reactstrap";
 import Data from "variables/variable.js";
 
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -44,6 +45,25 @@ const Organizations = ({sam}) => {
  const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
  const [modalShowOpen, setModalShowOpen] = React.useState(false);
 
+ const handleSubmit = async (event) =>{
+  event.preventDefault();
+  console.log(event);
+   const postData = {
+     Name: event.target[0].value ,
+     phoneNumber: event.target[1].value,
+     DOB: event.target[2].value,
+     Address: event.target[3].value,
+   }
+   const postResponse = await axios.post("http://localhost:3001/data/enterprise/orgvolunt", postData);
+   console.log(postResponse.data);
+}
+
+const [volunteerData, setVolunteerData] = React.useState(undefined);
+
+React.useEffect(async () => {
+  const volunteerDataGetResponse = await axios.get("http://localhost:3001/data/orgvolunt");
+  setVolunteerData(volunteerDataGetResponse.data);
+}, []);
 
   return (
     <>
@@ -74,7 +94,7 @@ const Organizations = ({sam}) => {
                 </CardHeader>
                 <CardBody className=" px-lg-5 py-lg-5">
 
-                  <Form role="form">
+                  <Form role="form" onSubmit={handleSubmit}>
                     <FormGroup className=" mb-3">
                       <InputGroup className=" input-group-alternative">
                         <InputGroupAddon addonType="prepend">
@@ -127,7 +147,7 @@ const Organizations = ({sam}) => {
           </label>
         </div>
                     <div className=" text-center">
-                      <Button className=" my-4" color="warning" type="button">
+                      <Button className=" my-4" color="warning" type="submit">
                         ADD
                       </Button>
                     </div>
@@ -150,13 +170,12 @@ const Organizations = ({sam}) => {
                   </tr>
                 </thead>
                 <tbody>
-                {Data.enterpriseVolunteerData.map(reqDataP => (
-                  <tr key={reqDataP.volunteerId}>
-                    <td >{reqDataP.volunteerId}</td>
-                    <td >{reqDataP.volunteerName}</td>
-                    <td >{reqDataP.volunteerAge}</td>
-                    <td >{reqDataP.casesSolved}</td>
-
+                {volunteerData && volunteerData.map(volunteer => (
+                    <tr key={volunteer.Id}>
+                    <td >{volunteer.Id}</td>
+                    <td >{volunteer.Name}</td>
+                    <td >{new Date().getYear() - new Date(volunteer.DOB).getYear()}</td>
+                    <td >{volunteer.Address}</td>
                     <td>
 
 
@@ -185,7 +204,8 @@ const Organizations = ({sam}) => {
                           <i className=" ni ni-circle-08"></i>
                           </InputGroupText>
                           </InputGroupAddon>
-                          <Input placeholder="Name" type="text"></Input>
+                          <Input placeholder={volunteer.Name} type="text"></Input>
+                          
                           </InputGroup>
                           </FormGroup>
                           <FormGroup>
@@ -195,7 +215,8 @@ const Organizations = ({sam}) => {
                           <i className=" ni ni-mobile-button"></i>
                           </InputGroupText>
                           </InputGroupAddon>
-                          <Input placeholder="Phone Number" type="tel"></Input>
+                          <Input placeholder={volunteer.phoneNumber} type="tel"></Input>
+                          
                           </InputGroup>
                           </FormGroup>
                           <FormGroup>
@@ -205,6 +226,7 @@ const Organizations = ({sam}) => {
                           <Input
 
                           id="example-date-input"
+                          placeholder={volunteer.DOB}
                           type="date"
                           ></Input>
                           </FormGroup>
@@ -215,7 +237,9 @@ const Organizations = ({sam}) => {
                           <i className=" ni ni-square-pin"></i>
                           </InputGroupText>
                           </InputGroupAddon>
-                          <Input placeholder="Address" type="text"></Input>
+                          <Input placeholder={volunteer.Address} 
+                          type="text"
+                          ></Input>
                           </InputGroup>
                           </FormGroup>
                           <div className=" custom-file">

@@ -1,8 +1,26 @@
 import React from "react";
 import Data from "variables/variable.js";
+import axios from "axios";
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 function Header() {
+  const [countData, setCountData] = React.useState(undefined);
+
+  React.useEffect(async () => {
+    const countDataGetResponse = await axios.get("http://localhost:3001/data/orgCount");
+    setCountData(countDataGetResponse.data);
+    console.log(countDataGetResponse.data);
+  }, []);
+
+  const [voluntcountData, setvoluntCountData] = React.useState(undefined);
+
+  React.useEffect(async () => {
+    const voluntCountDataGetResponse = await axios.get("http://localhost:3001/data/voluntCount");
+    setvoluntCountData(voluntCountDataGetResponse.data);
+    console.log(voluntCountDataGetResponse.data);
+  }, []);
+
+
   return (
     <>
       <div className="header bg-gradient-dark pb-8 pt-5 pt-md-8">
@@ -22,7 +40,7 @@ function Header() {
                           No of Volunteers
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          {Data.adminStatistic.noOfVolunteers}
+                          {voluntcountData}
                         </span>
                       </div>
                       <Col className="col-auto">
@@ -92,7 +110,7 @@ function Header() {
                         >
                           No of Organizations
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{Data.adminStatistic.noOfOrganization}</span>
+                        <span className="h2 font-weight-bold mb-0">{countData}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-info text-white rounded-circle shadow">
