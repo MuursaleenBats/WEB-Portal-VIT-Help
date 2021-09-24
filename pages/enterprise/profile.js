@@ -3,6 +3,7 @@ import { Col, Form, FormGroup, Label, FormText } from 'reactstrap';
 import Link from 'next/link'
 import { Button } from "reactstrap";
 import Data from "variables/variable.js";
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -38,33 +39,58 @@ import Header from "components/Headers/EnterpriseHeader.js";
 const Profile = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
+  // const [orgData, setOrgData] = React.useState(undefined);
+  // const loadOrgData = async () => {
+  //   var org = JSON.parse(localStorage.getItem("vh-org"));
+  //   const orgDataGetResponse = await axios.get(`http://localhost:3001/data/enterpriseData/${org.NameofOrg}`);
+  //   setOrgData(orgDataGetResponse.data);
+  //   console.log(orgDataGetResponse.data);
+  // }
+  // React.useEffect(loadOrgData, []);
+
+  const updateOrg = async (event) => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    event.preventDefault();
+    console.log(event);
+    const postData = {
+      ...(event.target[0].value) && {NameofOrg: event.target[0].value},
+      //...(event.target[1].value) && {phoneNumber: event.target[1].value},
+      ...(event.target[2].value) && {Email: event.target[2].value},
+    }
+    const postResponse = await axios.patch(`http://localhost:3001/data/enterprise/${org.NameofOrg}`, postData);
+    console.log(postResponse.data);
+  }
+
   return (
     <>
       <Header />
       {/* Page content */}
 
-      <Form>
+      <Form role="form" onSubmit={updateOrg}>
           <Row form>
             <Col md={6}>
               <FormGroup>
                 <Label >Name</Label>
-                <Input defaultValue={Data.enterpriseProfileData.organizationName} type="text" name="name" id="nameOfOrganization" placeholder="Name Of Organization" />
+                <Input type="text" name="name" id="nameOfOrganization" placeholder={orgData.NameofOrg}/>
               </FormGroup>
             </Col>
             <Col md={6}>
               <FormGroup>
                 <Label >Type</Label>
-                <Input defaultValue={Data.enterpriseProfileData.addressOfOrganization} type="text" name="type" id="typeOfOrganization" placeholder="Type Of Organization" />
+                <Input type="text" name="type" id="typeOfOrganization" placeholder="Type Of Organization" />
               </FormGroup>
             </Col>
-          </Row>
+          <Col md={6}>
           <FormGroup>
             <Label for="exampleAddress">Address</Label>
-            <Input defaultValue={Data.enterpriseProfileData.typeOfOrganization} type="text" name="address" id="addressOfOrganization" placeholder="Address Of Organization"/>
+            <Input type="text" name="address" id="addressOfOrganization" placeholder={orgData.Email}/>
           </FormGroup>
+          </Col>
+          </Row>
           <Button
             color="warning"
-            type="button"
+            type="submit"
+            //onClick={updateOrg}
           >
             Update Details
           </Button>
