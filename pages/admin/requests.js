@@ -34,13 +34,36 @@ import {
 import Admin from "layouts/Admin.js";
 // core components
 import Header from "components/Headers/Header.js";
+import axios from "axios";
 
 const Requests = () => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 const [countryCode, setCountryCode] = useState("");
 
+const [orgData, setOrgData] = React.useState(undefined);
+const loadOrgData = async () => {
+  const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgData");
+  setOrgData(orgDataGetResponse.data);
+}
 
+React.useEffect(loadOrgData, []);
 
+const updateStatus = async (event, idx) => {
+  event.preventDefault();
+  //console.log(event);
+  const postData = {
+    Status: "True"
+  }
+  const postResponse = await axios.patch(`http://localhost:3001/data/updateOrgStatus/${orgData[idx].Id}`, postData);
+  console.log(postResponse.data);
+}
+
+const deleteOrgByIndex = async (event, index) =>{
+  event.preventDefault();
+  const postResponse = await axios.delete(`http://localhost:3001/data/deleteOrg/${orgData[index].Id}`);
+  // console.log(postResponse.data);
+  await loadOrgData();
+}
   return (
     <>
       <Header />
@@ -64,12 +87,11 @@ const [countryCode, setCountryCode] = useState("");
                   </tr>
                 </thead>
                 <tbody>
-                {Data.adminPendingRequest.map(reqDataP => (
-                  <tr key={reqDataP.requestId}>
-                    <td >{reqDataP.requestId}</td>
-                    <td >{reqDataP.nameOfOrganization}</td>
-                    <td >{reqDataP.typeOfOrganization}</td>
-
+                {orgData && orgData.map((orgdata, idx) => (
+                    <tr key={orgdata.Id}>
+                    <td >{orgdata.Id}</td>
+                    <td >{orgdata.NameofOrg}</td>
+                    <td >{"ORG TYPE"}</td>
                     <td>
 
                     <Button outline
@@ -83,7 +105,7 @@ const [countryCode, setCountryCode] = useState("");
                     >
                     <div className=" modal-header">
                       <h6 className=" modal-title" id="modal-title-default">
-                      Organizations Name Here
+                      {orgData.NameofOrg}
                       </h6>
                       <button
                         aria-label="Close"
@@ -96,10 +118,13 @@ const [countryCode, setCountryCode] = useState("");
                     </div>
                     <div className=" modal-body">
                       <p>
-                        \\---  Organizations Details  ---//
+                        {/* \\---  Organizations Details  ---// */}
                       </p>
                       <p>
-                      \\---  Organizations Details  ---//
+                      Id: {orgdata.Id}<br/>
+                      Name: {orgdata.NameofOrg}<br/>
+                      Email: {orgdata.Email}<br/>
+                      Phone Number: {orgdata.phoneNumber}<br/>
                       </p>
 
                     </div>
@@ -122,13 +147,15 @@ const [countryCode, setCountryCode] = useState("");
 
 
                     <td>
-                    <Button outline color="success" type="button">
+                    <Button outline color="success" type="submit" 
+                    onClick={(event) => updateStatus(event, idx)}>
                           Accept
                     </Button>
                     </td>
 
                     <td>
-                    <Button outline color="danger" type="button">
+                    <Button outline color="danger" type="submit"
+                    onClick={(event) => {deleteOrgByIndex(event, idx)}}>
                             Reject
                           </Button>
                     </td>

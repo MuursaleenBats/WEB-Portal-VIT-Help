@@ -22,7 +22,7 @@ import axios from "axios";
 function Register() {
   const handleSubmit = async (event) =>{
     event.preventDefault();
-    console.log(event);
+    //console.log(event);
     const postData = {
       NameofOrg:  event.target[0].value,
       Email: event.target[1].value,

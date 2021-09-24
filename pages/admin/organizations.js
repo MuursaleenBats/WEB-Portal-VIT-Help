@@ -35,11 +35,30 @@ const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
   const [orgData, setOrgData] = React.useState(undefined);
-  
-  React.useEffect(async () => {
-    const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgData");
+
+  const loadOrgData = async () => {
+    const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgDataStatus");
     setOrgData(orgDataGetResponse.data);
-  }, []);
+  }
+
+  React.useEffect(loadOrgData, []);
+
+  const deleteOrgByIndex = async (event, index) =>{
+    event.preventDefault();
+    const postResponse = await axios.delete(`http://localhost:3001/data/deleteOrg/${orgData[index].Id}`);
+    // console.log(postResponse.data);
+    await loadOrgData();
+  }
+
+  // const [orgVoluntcountData, setorgVoluntCountData] = React.useState(undefined);
+
+  // React.useEffect(async () => {
+  //   var org = JSON.parse(localStorage.getItem("vh-org"));
+  //   const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
+  //   setorgVoluntCountData(voluntCountDataGetResponse.data);
+  //   console.log(voluntCountDataGetResponse.data);
+  // }, []);
+
   return (
     <>
       <Header />
@@ -65,7 +84,7 @@ const Organizations = ({sam}) => {
                   </tr>
                 </thead>
                 <tbody>
-                {orgData && orgData.map(orgdata => (
+                {orgData && orgData.map((orgdata, idx) => (
                     <tr key={orgdata.Id}>
                     <td >{orgdata.Id}</td>
                     <td >{orgdata.NameofOrg}</td>
@@ -127,7 +146,8 @@ const Organizations = ({sam}) => {
 
 
                     <td>
-                    <Button outline color="danger" type="button">
+                    <Button outline color="danger" type="submit"
+                      onClick={(event) => {deleteOrgByIndex(event, idx)}}>
                           Remove Organization
                           </Button>
                     </td>

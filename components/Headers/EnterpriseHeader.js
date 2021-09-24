@@ -1,8 +1,19 @@
 import React from "react";
 import Data from "variables/variable.js";
+import axios from "axios";
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 function EnterpriseHeader() {
+
+  // const [orgVoluntcountData, setorgVoluntCountData] = React.useState(undefined);
+
+  // React.useEffect(async () => {
+  //   var org = JSON.parse(localStorage.getItem("vh-org"));
+  //   const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
+  //   setorgVoluntCountData(voluntCountDataGetResponse.data);
+  //   console.log(voluntCountDataGetResponse.data);
+  // }, []);
+
   return (
     <>
       <div className="header bg-gradient-dark pb-8 pt-5 pt-md-8">
