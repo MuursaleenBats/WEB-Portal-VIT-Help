@@ -39,14 +39,14 @@ import Header from "components/Headers/EnterpriseHeader.js";
 const Profile = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
-  // const [orgData, setOrgData] = React.useState(undefined);
-  // const loadOrgData = async () => {
-  //   var org = JSON.parse(localStorage.getItem("vh-org"));
-  //   const orgDataGetResponse = await axios.get(`http://localhost:3001/data/enterpriseData/${org.NameofOrg}`);
-  //   setOrgData(orgDataGetResponse.data);
-  //   console.log(orgDataGetResponse.data);
-  // }
-  // React.useEffect(loadOrgData, []);
+  const [orgData, setOrgData] = React.useState(undefined);
+  const loadOrgData = async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const orgDataGetResponse = await axios.get(`http://localhost:3001/data/enterpriseData/${org.NameofOrg}`);
+    setOrgData(orgDataGetResponse.data);
+    console.log(orgDataGetResponse.data);
+  }
+  React.useEffect(loadOrgData, []);
 
   const updateOrg = async (event) => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
@@ -71,7 +71,7 @@ const Profile = ({sam}) => {
             <Col md={6}>
               <FormGroup>
                 <Label >Name</Label>
-                <Input type="text" name="name" id="nameOfOrganization" placeholder={orgData.NameofOrg}/>
+                <Input type="text" name="name" id="nameOfOrganization" placeholder={orgData ? orgData.NameofOrg:"NameofOrg"}/>
               </FormGroup>
             </Col>
             <Col md={6}>
@@ -83,7 +83,7 @@ const Profile = ({sam}) => {
           <Col md={6}>
           <FormGroup>
             <Label for="exampleAddress">Address</Label>
-            <Input type="text" name="address" id="addressOfOrganization" placeholder={orgData.Email}/>
+            <Input type="text" name="address" id="addressOfOrganization" placeholder={orgData ? orgData.Email:"address"}/>
           </FormGroup>
           </Col>
           </Row>

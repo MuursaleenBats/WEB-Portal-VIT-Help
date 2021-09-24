@@ -31,10 +31,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/enterprise/dashboard.js"
     ],
-    "/enterprise/volunteers": [
+    "/enterprise/login": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/volunteers.js"
+      "static/chunks/pages/enterprise/login.js"
+    ],
+    "/enterprise/profile": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/enterprise/profile.js"
     ]
   },
   "ampFirstPages": []
