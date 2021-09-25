@@ -37,7 +37,11 @@ const Organizations = ({sam}) => {
   const [orgData, setOrgData] = React.useState(undefined);
 
   const loadOrgData = async () => {
-    const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgDataStatus");
+    const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgDataStatus", {
+      params: {
+        includeVolCount: true,
+      }
+    });
     setOrgData(orgDataGetResponse.data);
   }
 
@@ -89,7 +93,7 @@ const Organizations = ({sam}) => {
                     <td >{orgdata.Id}</td>
                     <td >{orgdata.NameofOrg}</td>
                     <td >{"ORG TYPE"}</td>
-                    <td >{"0"}</td>
+                    <td >{orgdata.volCount}</td>
                     <td>
                     <Button outline
                     onClick={() => setModalDefaultOpen(true)}

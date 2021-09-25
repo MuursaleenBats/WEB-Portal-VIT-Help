@@ -5,14 +5,14 @@ import axios from "axios";
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 function EnterpriseHeader() {
 
-  // const [orgVoluntcountData, setorgVoluntCountData] = React.useState(undefined);
+  const [orgVoluntcountData, setorgVoluntCountData] = React.useState(undefined);
 
-  // React.useEffect(async () => {
-  //   var org = JSON.parse(localStorage.getItem("vh-org"));
-  //   const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
-  //   setorgVoluntCountData(voluntCountDataGetResponse.data);
-  //   console.log(voluntCountDataGetResponse.data);
-  // }, []);
+  React.useEffect(async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
+    setorgVoluntCountData(voluntCountDataGetResponse.data);
+    console.log(voluntCountDataGetResponse.data);
+  }, []);
 
   return (
     <>
@@ -33,7 +33,7 @@ function EnterpriseHeader() {
                           No of Volunteers
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          {Data.enterpriseStatistic.noOfVolunteers}
+                          {orgVoluntcountData}
                         </span>
                       </div>
                       <Col className="col-auto">

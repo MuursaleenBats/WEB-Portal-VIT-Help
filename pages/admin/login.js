@@ -28,20 +28,23 @@ function Login() {
     }
     const getResponse = await axios.get(`http://localhost:3001/data/admin/${postData.phoneNumber}`);
     console.log(getResponse.data);
-     if(getResponse.data[0] === undefined){
-       alert("Admin Phine Number is not valid ");
+    if(getResponse.data === null){
+      alert("Please enter data")
+    }else{
+      if(getResponse.data[0] === undefined){
+        alert("Admin Phone Number is not valid ");
+      }
+      else{
+        if(getResponse.data[0].pass != postData.password){
+            alert("Invalid Credentials");
+         
+        }
+        else{
+         window.location.href="/admin/dashboard";
+        }
      }
-     else{
-       if(getResponse.data[0].pass != postData.password){
-           alert("Invalid Credentials");
-        
-       }
-       else{
-        window.location.href="/admin/dashboard";
-       }
-    }
-  }
-
+   }
+ }
   return (
     <>
       <Col lg="5" md="7">

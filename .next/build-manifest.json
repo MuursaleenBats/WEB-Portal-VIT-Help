@@ -26,20 +26,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/enterprise/dashboard": [
+    "/enterprise/notification": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/dashboard.js"
+      "static/chunks/pages/enterprise/notification.js"
     ],
-    "/enterprise/login": [
+    "/enterprise/volunteers": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/login.js"
-    ],
-    "/enterprise/profile": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/profile.js"
+      "static/chunks/pages/enterprise/volunteers.js"
     ]
   },
   "ampFirstPages": []

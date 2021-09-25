@@ -41,15 +41,13 @@ const Profile = ({sam}) => {
 
   const [orgData, setOrgData] = React.useState(undefined);
   const loadOrgData = async () => {
-    var org = JSON.parse(localStorage.getItem("vh-org"));
-    const orgDataGetResponse = await axios.get(`http://localhost:3001/data/enterpriseData/${org.NameofOrg}`);
-    setOrgData(orgDataGetResponse.data);
-    console.log(orgDataGetResponse.data);
+    // setTimeout(() => {
+      setOrgData(JSON.parse(localStorage.getItem("vh-org")));
+    // }, 5000);
   }
   React.useEffect(loadOrgData, []);
 
   const updateOrg = async (event) => {
-    var org = JSON.parse(localStorage.getItem("vh-org"));
     event.preventDefault();
     console.log(event);
     const postData = {
@@ -57,7 +55,7 @@ const Profile = ({sam}) => {
       //...(event.target[1].value) && {phoneNumber: event.target[1].value},
       ...(event.target[2].value) && {Email: event.target[2].value},
     }
-    const postResponse = await axios.patch(`http://localhost:3001/data/enterprise/${org.NameofOrg}`, postData);
+    const postResponse = await axios.patch(`http://localhost:3001/data/enterprise/${orgData.NameofOrg}`, postData);
     console.log(postResponse.data);
   }
 

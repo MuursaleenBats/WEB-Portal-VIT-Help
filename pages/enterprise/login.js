@@ -29,14 +29,17 @@ function Login() {
     }
     const getResponse = await axios.get(`http://localhost:3001/data/enterprise/${postData.phoneNumber}`);
     console.log(getResponse.data);
-    if(getResponse.data === undefined){
+
+    if(getResponse.data === null){
+      alert("Please enter data")
+    }else{
+     if(getResponse.data === undefined){
       alert("Enterprise does not exist. Please register ");
-    }
-    else{
+     }
+     else{
       if(getResponse.data.password != postData.password){
           alert("Invalid Credentials");
-        
-      }
+       }
       else{
         // alert("good");
         
@@ -50,6 +53,7 @@ function Login() {
         window.location.href="/enterprise/dashboard";
       }
     }
+   }
   }
 
   return (

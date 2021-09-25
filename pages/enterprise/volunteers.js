@@ -198,7 +198,7 @@ const Organizations = ({ sam }) => {
                       <td >{volunteer.Id}</td>
                       <td >{volunteer.Name}</td>
                       <td >{new Date().getYear() - new Date(volunteer.DOB).getYear()}</td>
-                      <td >{volunteer.Address}</td>
+                      <td >{0}</td>
                       <td>
 
 
