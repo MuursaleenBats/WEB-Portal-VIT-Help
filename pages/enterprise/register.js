@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 
 // reactstrap components
 import {
@@ -28,7 +28,7 @@ function Register() {
       Email: event.target[1].value,
       phoneNumber: parseInt(event.target[2].value),
       password: event.target[3].value
-    } 
+    }
     const postResponse = await axios.post("http://localhost:3001/data/enterprise", postData);
     console.log(postResponse.data);
   }
@@ -55,6 +55,34 @@ function Register() {
                   <Input placeholder="Name Of Organization" type="text" />
                 </InputGroup>
               </FormGroup>
+
+     <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-hat-3" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+ <Input size="sm" type="select">
+        <option value="Option One" >Organization type</option>
+        <option value="Option One" >Option One</option>
+        <option value="Option Two" >Option Two</option>
+        <option value="Option Three" >Option Three</option>
+      </Input>
+ </InputGroup>
+              </FormGroup>
+
+    <FormGroup>
+                <InputGroup className="input-group-alternative mb-3">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-paper-diploma" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <Input placeholder="License ID" type="text" />
+                </InputGroup>
+              </FormGroup>
+
               <FormGroup>
                 <InputGroup className="input-group-alternative mb-3">
                   <InputGroupAddon addonType="prepend">

@@ -26,15 +26,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/enterprise/notification": [
+    "/enterprise/register": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/notification.js"
-    ],
-    "/enterprise/volunteers": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/volunteers.js"
+      "static/chunks/pages/enterprise/register.js"
     ]
   },
   "ampFirstPages": []
