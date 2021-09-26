@@ -54,15 +54,6 @@ const Organizations = ({sam}) => {
     await loadOrgData();
   }
 
-  // const [orgVoluntcountData, setorgVoluntCountData] = React.useState(undefined);
-
-  // React.useEffect(async () => {
-  //   var org = JSON.parse(localStorage.getItem("vh-org"));
-  //   const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
-  //   setorgVoluntCountData(voluntCountDataGetResponse.data);
-  //   console.log(voluntCountDataGetResponse.data);
-  // }, []);
-
   return (
     <>
       <Header />
@@ -144,11 +135,6 @@ const Organizations = ({sam}) => {
                     </div>
                     </Modal>
                     </td>
-
-
-
-
-
                     <td>
                     <Button outline color="danger" type="submit"
                       onClick={(event) => {deleteOrgByIndex(event, idx)}}>

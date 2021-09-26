@@ -9,7 +9,7 @@ function EnterpriseHeader() {
 
   React.useEffect(async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
+    const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.Id}`);
     setorgVoluntCountData(voluntCountDataGetResponse.data);
     console.log(voluntCountDataGetResponse.data);
   }, []);

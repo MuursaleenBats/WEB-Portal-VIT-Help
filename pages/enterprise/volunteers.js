@@ -48,13 +48,14 @@ const Organizations = ({ sam }) => {
   const handleSubmit = async (event) => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
     event.preventDefault();
-    //console.log(event);
+    console.log(event);
     const postData = {
-      OrganizationName: org.NameofOrg,
       Name: event.target[0].value,
+      CountryCode: "91",
       phoneNumber: event.target[1].value,
       DOB: event.target[2].value,
       Address: event.target[3].value,
+
     }
     const postResponse = await axios.post("http://localhost:3001/data/enterprise/orgvolunt", postData);
     console.log(postResponse.data);
@@ -63,7 +64,7 @@ const Organizations = ({ sam }) => {
   const [volunteerData, setVolunteerData] = React.useState(undefined);
   const loadOrgData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const volunteerDataGetResponse = await axios.get(`http://localhost:3001/data/orgvolunt/${org.NameofOrg}`);
+    const volunteerDataGetResponse = await axios.get(`http://localhost:3001/data/orgvolunt/${org.Id}`);
     setVolunteerData(volunteerDataGetResponse.data);
   }
   React.useEffect(loadOrgData, []);
@@ -197,7 +198,7 @@ const Organizations = ({ sam }) => {
                     <tr key={volunteer.Id}>
                       <td >{volunteer.Id}</td>
                       <td >{volunteer.Name}</td>
-                      <td >{new Date().getYear() - new Date(volunteer.DOB).getYear()}</td>
+                      <td >{volunteer.Age}</td>
                       <td >{0}</td>
                       <td>
 
@@ -238,7 +239,7 @@ const Organizations = ({ sam }) => {
                                           <i className=" ni ni-mobile-button"></i>
                                         </InputGroupText>
                                       </InputGroupAddon>
-                                      <Input placeholder={volunteer.phoneNumber} type="tel"></Input>
+                                      <Input placeholder={volunteer.PhoneNumber} type="tel"></Input>
 
                                     </InputGroup>
                                   </FormGroup>
@@ -249,7 +250,7 @@ const Organizations = ({ sam }) => {
                                     <Input
 
                                       id="example-date-input"
-                                      placeholder={volunteer.DOB}
+                                      //placeholder={volunteer.Age}
                                       type="date"
                                     ></Input>
                                   </FormGroup>
@@ -311,7 +312,7 @@ const Organizations = ({ sam }) => {
                                           <i className=" ni ni-circle-08"></i>
                                         </InputGroupText>
                                       </InputGroupAddon>
-                                      <Input placeholder="Name" type="text"></Input>
+                                      <Input placeholder={volunteer.Name} type="text"></Input>
                                     </InputGroup>
                                   </FormGroup>
                                   <FormGroup>
@@ -321,7 +322,7 @@ const Organizations = ({ sam }) => {
                                           <i className=" ni ni-mobile-button"></i>
                                         </InputGroupText>
                                       </InputGroupAddon>
-                                      <Input placeholder="Phone Number" type="tel"></Input>
+                                      <Input placeholder={volunteer.PhoneNumber} type="tel"></Input>
                                     </InputGroup>
                                   </FormGroup>
                                   <FormGroup>
@@ -341,7 +342,7 @@ const Organizations = ({ sam }) => {
                                           <i className=" ni ni-square-pin"></i>
                                         </InputGroupText>
                                       </InputGroupAddon>
-                                      <Input placeholder="Address" type="text"></Input>
+                                      <Input placeholder={volunteer.Address} type="text"></Input>
                                     </InputGroup>
                                   </FormGroup>
                                   <div className=" custom-file">

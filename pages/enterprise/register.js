@@ -22,12 +22,14 @@ import axios from "axios";
 function Register() {
   const handleSubmit = async (event) =>{
     event.preventDefault();
-    //console.log(event);
+    console.log(event);
     const postData = {
       NameofOrg:  event.target[0].value,
-      Email: event.target[1].value,
-      phoneNumber: parseInt(event.target[2].value),
-      password: event.target[3].value
+      orgType: event.target[1].value,
+      orgLicenseId: event.target[2].value,
+      Email: event.target[3].value,
+      phoneNumber: parseInt(event.target[4].value),
+      password: event.target[5].value
     }
     const postResponse = await axios.post("http://localhost:3001/data/enterprise", postData);
     console.log(postResponse.data);
@@ -65,9 +67,9 @@ function Register() {
                   </InputGroupAddon>
  <Input size="sm" type="select">
         <option value="Option One" >Organization type</option>
-        <option value="Option One" >Option One</option>
-        <option value="Option Two" >Option Two</option>
-        <option value="Option Three" >Option Three</option>
+        <option value="NGO" >NGO</option>
+        <option value="HOSPITAL" >HOSPITAL</option>
+        <option value="POLICE STATION" >POLICE STATION</option>
       </Input>
  </InputGroup>
               </FormGroup>
