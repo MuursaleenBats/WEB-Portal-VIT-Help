@@ -25,6 +25,21 @@
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
+    ],
+    "/admin/organizations": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/admin/organizations.js"
+    ],
+    "/enterprise/login": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/enterprise/login.js"
+    ],
+    "/enterprise/register": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/enterprise/register.js"
     ]
   },
   "ampFirstPages": []

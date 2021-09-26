@@ -34,8 +34,6 @@ import Header from "components/Headers/Header.js";
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
-  const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
-
   const [orgData, setOrgData] = React.useState(undefined);
 
   const loadOrgData = async () => {

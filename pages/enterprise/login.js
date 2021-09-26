@@ -24,14 +24,12 @@ function Login() {
   const handleSubmit = async (event) =>{
     event.preventDefault();
       const postData = {
-      phoneNumber: parseInt(event.target[0].value),
-      password: event.target[1].value
+        Email: event.target[0].value,
+        password: event.target[1].value
     }
-    const getResponse = await axios.get(`http://localhost:3001/data/enterprise/${postData.phoneNumber}`);
-    console.log(getResponse.data);
-
+    const getResponse = await axios.get(`http://localhost:3001/data/enterprise/${postData.Email}`);
     if(getResponse.data === null){
-      alert("Please enter valid phone number")
+      alert("Please enter valid email id")
     }else{
      if(getResponse.data === undefined){
       alert("Enterprise does not exist. Please register ");
@@ -76,9 +74,9 @@ function Login() {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Phone Number"
-                    type="tel"
-
+                    placeholder="Email"
+                    type="email"
+                    autoComplete="new-email"
                   />
                 </InputGroup>
               </FormGroup>
