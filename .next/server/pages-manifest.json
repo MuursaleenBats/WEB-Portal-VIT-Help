@@ -2,5 +2,5 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/enterprise/register": "pages/enterprise/register.js"
+  "/admin/manageAdmin": "pages/admin/manageAdmin.js"
 }

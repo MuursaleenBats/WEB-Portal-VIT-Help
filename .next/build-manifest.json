@@ -26,10 +26,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/enterprise/register": [
+    "/admin/manageAdmin": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/enterprise/register.js"
+      "static/chunks/pages/admin/manageAdmin.js"
     ]
   },
   "ampFirstPages": []

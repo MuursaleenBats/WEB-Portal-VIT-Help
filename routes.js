@@ -5,25 +5,19 @@ var routes = [
     icon: "ni ni-tv-2 text-primary",
     layout: "/admin",
   },
-  /*{
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
+  {
+    path: "/manageAdmin",
+    name: "Manage Admin",
+    icon: "ni ni-badge",
     layout: "/admin",
   },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    layout: "/admin",
-  },*/
-  {
+{
     path: "/organizations",
     name: "List of Organizations",
     icon: "ni ni-single-02 text-yellow",
     layout: "/admin",
-  },
-  {
+  },  
+{
     path: "/requests",
     name: "Pending Requests",
     icon: "ni ni-bullet-list-67 text-red",

@@ -80,6 +80,16 @@ enterpriseVolunteerData: [
 }
 
 ],
+adminUserData: [
+{
+  "adminId" : 1,
+  "adminName" : "NAME_V",
+  "adminEmail" : "a@a.com",
+  "adminMobile" : "+91 1000010000",
+  "adminAddress" : "ADMIN ADD",
+}
+
+],
 enterpriseVolunteerFullData : {
 
   "volunteerId" : 1,
