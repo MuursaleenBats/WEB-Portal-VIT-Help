@@ -80,6 +80,7 @@ const Organizations = ({ sam }) => {
     }
     const postResponse = await axios.patch(`http://localhost:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
     console.log(postResponse.data);
+    await loadOrgData();
   }
   
   const deleteVolunteerByIndex = async (event, index) => {

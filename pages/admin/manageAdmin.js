@@ -36,7 +36,7 @@ import {
 import Admin from "layouts/Admin.js";
 // core components
 import Header from "components/Headers/Header.js";
-
+import axios from "axios";
 
 const Admins = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
@@ -44,7 +44,49 @@ const Admins = ({sam}) => {
  const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
  const [modalShowOpen, setModalShowOpen] = React.useState(false);
 
+ const handleSubmit = async (event) =>{
+  event.preventDefault();
+  console.log(event);
+  const postData = {
+    Name:  event.target[0].value,
+    mobile_no: parseInt(event.target[1].value),
+    Email: event.target[2].value,
+    Address: event.target[3].value,
+    pass: event.target[4].value,
+  }
+  const postResponse = await axios.post("http://localhost:3001/data/admin", postData);
+  console.log(postResponse.data);
+  }
 
+const [adminData, setAdminData] = React.useState(undefined);
+
+const loadAdminData = async () => {
+  const adminDataGetResponse = await axios.get("http://localhost:3001/data/adminData");
+  setAdminData(adminDataGetResponse.data);
+}
+
+React.useEffect(loadAdminData, []);
+
+const updateAdmin = async (event, idx) => {
+  event.preventDefault();
+  console.log(event);
+  const postData = {
+    ...(event.target[1].value) && {Name: event.target[1].value},
+    ...(event.target[2].value) && {phoneNumber: event.target[2].value},
+    ...(event.target[3].value) && {Email: event.target[3].value},
+    ...(event.target[4].value) && {Address: event.target[4].value},    
+  }
+  const postResponse = await axios.patch(`http://localhost:3001/data/updateAdmin/${adminData[idx].Id}`, postData);
+  console.log(postResponse.data);
+  await loadAdminData();
+}
+
+const deleteAdminByIndex = async (event, index) => {
+  event.preventDefault();
+  const postResponse = await axios.delete(`http://localhost:3001/data/deleteAdmin/${adminData[index].Id}`);
+  // console.log(postResponse.data);
+  await loadAdminData();
+}
   return (
     <>
       <Header />
@@ -74,7 +116,7 @@ const Admins = ({sam}) => {
                 </CardHeader>
                 <CardBody className=" px-lg-5 py-lg-5">
 
-                  <Form role="form">
+                  <Form role="form" onSubmit={handleSubmit}>
                     <FormGroup className=" mb-3">
                       <InputGroup className=" input-group-alternative">
                         <InputGroupAddon addonType="prepend">
@@ -142,7 +184,7 @@ const Admins = ({sam}) => {
           </label>
         </div>
                     <div className=" text-center">
-                      <Button className=" my-4" color="warning" type="button">
+                      <Button className=" my-4" color="warning" type="submit">
                         ADD
                       </Button>
                     </div>
@@ -164,14 +206,12 @@ const Admins = ({sam}) => {
                   </tr>
                 </thead>
                 <tbody>
-                {Data.adminUserData.map(reqDataP => (
-                  <tr key={reqDataP.adminId}>
-                    <td >{reqDataP.adminId}</td>
-                    <td >{reqDataP.adminName}</td>
-                    <td >{reqDataP.adminEmail}</td>
-                    <td >{reqDataP.adminMobile}</td>
-                    <td >{reqDataP.adminAddress}</td>
-
+                {adminData && adminData.map((admindata, idx) => (
+                    <tr key={admindata.Id}>
+                    <td >{admindata.Id}</td>
+                    <td >{admindata.Name}</td>
+                    <td >{admindata.mobile_no}</td>
+                    <td >{admindata.Address}</td>
                     <td>
 
 
@@ -200,7 +240,7 @@ const Admins = ({sam}) => {
                             <i className=" ni ni-circle-08"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Name" type="text"></Input>
+                        <Input placeholder={admindata.Name} type="text"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -211,7 +251,7 @@ const Admins = ({sam}) => {
                             <i className=" ni ni-mobile-button"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Phone Number" type="tel"></Input>
+                        <Input placeholder={admindata.mobile_no} type="tel"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -222,7 +262,7 @@ const Admins = ({sam}) => {
                             <i className="ni ni-email-83"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Email ID" type="email"></Input>
+                        <Input placeholder={admindata.Email} type="email"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -233,7 +273,7 @@ const Admins = ({sam}) => {
                                    <i className=" ni ni-square-pin"></i>
                                  </InputGroupText>
                                </InputGroupAddon>
-                               <Input placeholder="Address" type="text"></Input>
+                               <Input placeholder={admindata.Address} type="text"></Input>
                              </InputGroup>
                            </FormGroup>
                           <div className=" custom-file">
@@ -274,7 +314,7 @@ const Admins = ({sam}) => {
                     </CardHeader>
                     <CardBody className=" px-lg-5 py-lg-5">
 
-                    <Form role="form">
+                    <Form role="form" onSubmit={(event) => updateAdmin(event, idx)}>
 <FormGroup className=" mb-3">
                       <InputGroup className=" input-group-alternative">
                         <InputGroupAddon addonType="prepend">
@@ -282,7 +322,7 @@ const Admins = ({sam}) => {
                             <i className=" ni ni-circle-08"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Admin ID" type="text"></Input>
+                        <Input placeholder={admindata.Id} type="text"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -293,7 +333,7 @@ const Admins = ({sam}) => {
                             <i className=" ni ni-circle-08"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Name" type="text"></Input>
+                        <Input placeholder={admindata.Name} type="text"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -304,7 +344,7 @@ const Admins = ({sam}) => {
                             <i className=" ni ni-mobile-button"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Phone Number" type="tel"></Input>
+                        <Input placeholder={admindata.mobile_no} type="tel"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -315,7 +355,7 @@ const Admins = ({sam}) => {
                             <i className="ni ni-email-83"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Email ID" type="email"></Input>
+                        <Input placeholder={admindata.Email} type="email"></Input>
                       </InputGroup>
                     </FormGroup>
 
@@ -326,7 +366,7 @@ const Admins = ({sam}) => {
                                    <i className=" ni ni-square-pin"></i>
                                  </InputGroupText>
                                </InputGroupAddon>
-                               <Input placeholder="Address" type="text"></Input>
+                               <Input placeholder={admindata.Address} type="text"></Input>
                              </InputGroup>
                            </FormGroup>
                     <div className=" custom-file">
@@ -341,7 +381,8 @@ const Admins = ({sam}) => {
                     </label>
                     </div>
                     <div className=" text-center">
-                    <Button className=" my-4" color="warning" type="button">
+                    <Button className=" my-4" color="warning"
+                    type="submit">
                     Update
                     </Button>
                     </div>
@@ -356,7 +397,9 @@ const Admins = ({sam}) => {
 
 
                     <td>
-                    <Button outline color="danger" type="button">
+                    <Button outline color="danger" 
+                    onClick={(event) => {deleteAdminByIndex(event, idx)}}
+                    type="submit">
                           Remove
                           </Button>
                     </td>
