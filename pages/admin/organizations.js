@@ -83,7 +83,7 @@ const Organizations = ({sam}) => {
                     <tr key={orgdata.Id}>
                     <td >{orgdata.Id}</td>
                     <td >{orgdata.NameofOrg}</td>
-                    <td >{"ORG TYPE"}</td>
+                    <td >{orgdata.orgType}</td>
                     <td >{orgdata.volCount}</td>
                     <td>
                     <Button outline
@@ -117,6 +117,7 @@ const Organizations = ({sam}) => {
                       Name: {orgdata.NameofOrg}<br/>
                       Email: {orgdata.Email}<br/>
                       Phone Number: {orgdata.phoneNumber}<br/>
+                      Type: {orgdata.orgType}<br/>
                       </p>
 
                     </div>

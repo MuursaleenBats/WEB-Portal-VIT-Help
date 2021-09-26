@@ -70,7 +70,7 @@ function Login() {
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-mobile-button" />
+                      <i className="ni ni-email-83"/>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

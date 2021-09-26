@@ -91,7 +91,7 @@ const deleteOrgByIndex = async (event, index) =>{
                     <tr key={orgdata.Id}>
                     <td >{orgdata.Id}</td>
                     <td >{orgdata.NameofOrg}</td>
-                    <td >{"ORG TYPE"}</td>
+                    <td >{orgdata.orgType}</td>
                     <td>
 
                     <Button outline
@@ -125,6 +125,7 @@ const deleteOrgByIndex = async (event, index) =>{
                       Name: {orgdata.NameofOrg}<br/>
                       Email: {orgdata.Email}<br/>
                       Phone Number: {orgdata.phoneNumber}<br/>
+                      Type: {orgdata.orgType}<br/>
                       </p>
 
                     </div>
