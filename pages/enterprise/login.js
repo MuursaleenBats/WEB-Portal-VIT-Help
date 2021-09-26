@@ -31,7 +31,7 @@ function Login() {
     console.log(getResponse.data);
 
     if(getResponse.data === null){
-      alert("Please enter data")
+      alert("Please enter valid phone number")
     }else{
      if(getResponse.data === undefined){
       alert("Enterprise does not exist. Please register ");

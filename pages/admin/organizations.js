@@ -34,6 +34,8 @@ import Header from "components/Headers/Header.js";
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
+  const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
+
   const [orgData, setOrgData] = React.useState(undefined);
 
   const loadOrgData = async () => {
@@ -53,15 +55,6 @@ const Organizations = ({sam}) => {
     // console.log(postResponse.data);
     await loadOrgData();
   }
-
-  // const [orgVoluntcountData, setorgVoluntCountData] = React.useState(undefined);
-
-  // React.useEffect(async () => {
-  //   var org = JSON.parse(localStorage.getItem("vh-org"));
-  //   const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.NameofOrg}`);
-  //   setorgVoluntCountData(voluntCountDataGetResponse.data);
-  //   console.log(voluntCountDataGetResponse.data);
-  // }, []);
 
   return (
     <>
@@ -144,11 +137,6 @@ const Organizations = ({sam}) => {
                     </div>
                     </Modal>
                     </td>
-
-
-
-
-
                     <td>
                     <Button outline color="danger" type="submit"
                       onClick={(event) => {deleteOrgByIndex(event, idx)}}>
