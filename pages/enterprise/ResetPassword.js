@@ -17,8 +17,38 @@ import {
 } from "reactstrap";
 // layout for this page
 import Auth from "layouts/Auth.js";
-
+import axios from "axios";
 function ResetPassword() {
+
+  const handleSubmit = async (event) =>{
+    event.preventDefault();
+      const postData = {
+        phoneNumber : event.target[0].value
+    }
+    const getResponse = await axios.get(`http://localhost:3001/data/enterprisePhone/${postData.phoneNumber}`);
+    //console.log(getResponse.data);
+    if(getResponse.data.length === 0){
+
+      alert("Please enter valid phone number");
+
+    }
+    else{
+     if(event.target[1].value !="" && event.target[2].value != ""){
+      if(event.target[1].value===event.target[2].value){
+        localStorage.setItem("vh-pass", event.target[2].value);
+        localStorage.setItem("vh-vol", JSON.stringify(getResponse.data));
+        window.location.href="/enterprise/varify";
+      }
+      else{
+        alert("Please make sure you have entered correct password second time");
+      }
+     }
+     else{
+       alert("Please enter password");
+     }
+   }
+  }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -30,7 +60,7 @@ function ResetPassword() {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
 
-            <Form role="form">
+            <Form role="form" onSubmit={handleSubmit}>
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -76,8 +106,8 @@ function ResetPassword() {
 
               <div className="text-center">
                 <Button
-                href="/enterprise/varify"
-                className="my-4" color="primary" type="button">
+                //href="/enterprise/varify"
+                className="my-4" color="primary" type="submit">
                   Change Password
                 </Button>
               </div>

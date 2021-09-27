@@ -44,22 +44,6 @@ const Organizations = ({ sam }) => {
   const [modalFormOpen, setModalFormOpen] = React.useState(false);
   const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
   const [modalShowOpen, setModalShowOpen] = React.useState(false);
-
-  const handleSubmit = async (event) => {
-    var org = JSON.parse(localStorage.getItem("vh-org"));
-    event.preventDefault();
-    console.log(event);
-    const postData = {
-      Name: event.target[0].value,
-      CountryCode: "91",
-      phoneNumber: event.target[1].value,
-      DOB: event.target[2].value,
-      Address: event.target[3].value,
-
-    }
-    const postResponse = await axios.post("http://localhost:3001/data/enterprise/orgvolunt", postData);
-    console.log(postResponse.data);
-  }
   
   const [volunteerData, setVolunteerData] = React.useState(undefined);
   const loadOrgData = async () => {
@@ -69,6 +53,26 @@ const Organizations = ({ sam }) => {
   }
   React.useEffect(loadOrgData, []);
 
+  const handleSubmit = async (event) => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    event.preventDefault();
+    console.log(event);
+    const postData = {
+      Name: event.target[0].value,
+      CountryCode: "91",
+      PhoneNumber: event.target[1].value,
+      Age: new Date().getYear() - new Date(event.target[2].value).getYear(),
+      Address: event.target[3].value,
+      Lat: "00.000",
+      Lng: "00.000",
+      Profession: "Employee",
+      EnterpriseId: org.Id
+    }
+    const postResponse = await axios.post("http://localhost:3001/data/enterprise/orgvolunt", postData);
+    console.log(postResponse.data);
+    await loadOrgData();
+  }
+  
   const updateVol = async (event, idx) => {
     event.preventDefault();
     //console.log(event);
@@ -160,7 +164,7 @@ const Organizations = ({ sam }) => {
                               <Input placeholder="Address" type="text"></Input>
                             </InputGroup>
                           </FormGroup>
-                          <div className=" custom-file">
+                          {/* <div className=" custom-file">
                             <input
                               className=" custom-file-input"
                               id="customFileLang"
@@ -170,7 +174,7 @@ const Organizations = ({ sam }) => {
                             <label className=" custom-file-label" htmlFor="customFileLang">
                               File If Any
                             </label>
-                          </div>
+                          </div> */}
                           <div className=" text-center">
                             <Button className=" my-4" color="warning" type="submit">
                               ADD
@@ -246,13 +250,10 @@ const Organizations = ({ sam }) => {
                                   </FormGroup>
                                   <FormGroup>
                                     <label className=" form-control-label" htmlFor="example-date-input">
-                                      Date of Birth
+                                      Age
                                     </label>
                                     <Input
-
-                                      id="example-date-input"
-                                      //placeholder={volunteer.Age}
-                                      type="date"
+                                      placeholder={volunteer.Age}
                                     ></Input>
                                   </FormGroup>
                                   <FormGroup className=" mb-3">
@@ -267,7 +268,7 @@ const Organizations = ({ sam }) => {
                                       ></Input>
                                     </InputGroup>
                                   </FormGroup>
-                                  <div className=" custom-file">
+                                  {/* <div className=" custom-file">
                                     <input
                                       className=" custom-file-input"
                                       id="customFileLang"
@@ -277,7 +278,7 @@ const Organizations = ({ sam }) => {
                                     <label className=" custom-file-label" htmlFor="customFileLang">
                                       File If Any
                                     </label>
-                                  </div>
+                                  </div> */}
                                   <div className=" text-center">
 
                                   </div>
@@ -328,12 +329,10 @@ const Organizations = ({ sam }) => {
                                   </FormGroup>
                                   <FormGroup>
                                     <label className=" form-control-label" htmlFor="example-date-input">
-                                      Date of Birth
+                                      Age
                                     </label>
                                     <Input
-
-                                      id="example-date-input"
-                                      type="date"
+                                    placeholder={volunteer.Age}  
                                     ></Input>
                                   </FormGroup>
                                   <FormGroup className=" mb-3">
@@ -346,7 +345,7 @@ const Organizations = ({ sam }) => {
                                       <Input placeholder={volunteer.Address} type="text"></Input>
                                     </InputGroup>
                                   </FormGroup>
-                                  <div className=" custom-file">
+                                  {/* <div className=" custom-file">
                                     <input
                                       className=" custom-file-input"
                                       id="customFileLang"
@@ -356,7 +355,7 @@ const Organizations = ({ sam }) => {
                                     <label className=" custom-file-label" htmlFor="customFileLang">
                                       File If Any
                                     </label>
-                                  </div>
+                                  </div> */}
                                   <div className=" text-center">
                                     <Button className=" my-4" color="warning" type="submit">
                                       Update

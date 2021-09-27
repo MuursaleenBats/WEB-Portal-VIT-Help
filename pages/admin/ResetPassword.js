@@ -19,6 +19,34 @@ import {
 import Auth from "layouts/Auth.js";
 
 function ResetPassword() {
+  const handleSubmit = async (event) =>{
+    event.preventDefault();
+      const postData = {
+        phoneNumber : event.target[0].value
+    }
+    const getResponse = await axios.get(`http://localhost:3001/data/enterprisePhone/${postData.phoneNumber}`);
+    //console.log(getResponse.data);
+    if(getResponse.data.length === 0){
+
+      alert("Please enter valid phone number");
+
+    }
+    else{
+     if(event.target[1].value !="" && event.target[2].value != ""){
+      if(event.target[1].value===event.target[2].value){
+        localStorage.setItem("vh-pass", event.target[2].value);
+        localStorage.setItem("vh-vol", JSON.stringify(getResponse.data));
+        window.location.href="/enterprise/varify";
+      }
+      else{
+        alert("Please make sure you have entered correct password second time");
+      }
+     }
+     else{
+       alert("Please enter password");
+     }
+   }
+  }
   return (
     <>
       <Col lg="5" md="7">
