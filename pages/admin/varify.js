@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 // reactstrap components
 import {
   Button,
@@ -19,17 +19,17 @@ import {
 import Auth from "layouts/Auth.js";
 
 function varify() {
-  const updateOrg = async (event) => {
+  const updateAdmin = async (event) => {
     event.preventDefault();
-    var pass = localStorage.getItem("vh-pass");
-    var vol = JSON.parse(localStorage.getItem("vh-vol"));
+    var passwd = localStorage.getItem("vh-pass");
+    var admin = JSON.parse(localStorage.getItem("vh-admin"));
     //console.log(event);
-    console.log(pass);
-    console.log(vol);
+    console.log(passwd);
+    console.log(admin);
     const postData = {
-      password: pass
+      pass: passwd
     }
-    const postResponse = await axios.patch(`http://localhost:3001/data/enterprisephnNo/${vol[0].phoneNumber}`,postData);
+    const postResponse = await axios.patch(`http://localhost:3001/data/adminphnNo/${admin[0].mobile_no}`,postData);
     console.log(postResponse.data);
     //await loadOrgData();
   }
@@ -44,7 +44,7 @@ function varify() {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
 
-            <Form role="form">
+            <Form role="form" onSubmit={updateAdmin}>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -62,8 +62,8 @@ function varify() {
 
               <div className="text-center">
                 <Button
-                href="/enterprise/dashboard"
-                className="my-4" color="primary" type="button">
+                //href="/admin/dashboard"
+                className="my-4" color="primary" type="submit">
                   Change Password
                 </Button>
               </div>

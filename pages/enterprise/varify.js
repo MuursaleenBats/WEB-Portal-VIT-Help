@@ -32,6 +32,7 @@ function varify() {
     }
     const postResponse = await axios.patch(`http://localhost:3001/data/enterprisephnNo/${vol[0].phoneNumber}`,postData);
     console.log(postResponse.data);
+    alert("Password Updated");
     //await loadOrgData();
   }
 

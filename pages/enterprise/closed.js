@@ -2,7 +2,7 @@ import React from "react";
 import Link from 'next/link'
 import { Button } from "reactstrap";
 import Data from "variables/variable.js";
-
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -34,6 +34,10 @@ import Header from "components/Headers/EnterpriseHeader.js";
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
+  // const getCaseDetails = async (event) =>{
+  //   const getResponse = await axios.get("http://localhost:3001/data/closedCases");
+  //   console.log(getResponse.data);
+  // } 
   return (
     <>
       <Header />

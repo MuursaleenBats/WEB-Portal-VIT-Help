@@ -11,8 +11,24 @@ function EnterpriseHeader() {
     var org = JSON.parse(localStorage.getItem("vh-org"));
     const voluntCountDataGetResponse = await axios.get(`http://localhost:3001/data/orgVoluntCount/${org.Id}`);
     setorgVoluntCountData(voluntCountDataGetResponse.data);
-    console.log(voluntCountDataGetResponse.data);
+    //console.log(voluntCountDataGetResponse.data);
   }, []);
+
+  // const [closedCaseCount, setclosedCaseCount] = React.useState(undefined);
+
+  // React.useEffect(async () => {
+  //   const closedCaseCountData = await axios.get("http://localhost:3001/data/closedCasesCount");
+  //   setvoluntCountData(closedCaseCountData.data);
+  //   console.log(closedCaseCountData.data);
+  // }, []);
+
+  // const [activeCaseCount, setactiveCaseCount] = React.useState(undefined);
+
+  // React.useEffect(async () => {
+  //   const activeCaseCountData = await axios.get("http://localhost:3001/data/activeCasesCount");
+  //   setactiveCountData(activeCaseCountData.data);
+  //   console.log(activeCaseCountData.data);
+  // }, []);
 
   return (
     <>

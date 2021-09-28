@@ -2,7 +2,7 @@ import React from "react";
 import Link from 'next/link'
 import { Button } from "reactstrap";
 import Data from "variables/variable.js";
-
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -33,7 +33,10 @@ import Header from "components/Headers/EnterpriseHeader.js";
 
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
-
+  // const getCaseDetails = async (event) =>{
+  //   const getResponse = await axios.get("http://localhost:3001/data/cases");
+  //   console.log(getResponse.data);
+  // }
   return (
     <>
       <Header />
@@ -49,7 +52,7 @@ const Organizations = ({sam}) => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Case</th>
+                    <th scope="col">Case Id</th>
                     <th scope="col">Date</th>
                     <th scope="col">Volunteer NAME</th>
                     <th scope="col">Type</th>
@@ -112,7 +115,11 @@ const Organizations = ({sam}) => {
                     </div>
                     </Modal>
                     </td>
-
+                    <td>
+                    <Button outline color="success" type="submit">
+                          Accept Case
+                    </Button>
+                    </td>
 
 
 

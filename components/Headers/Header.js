@@ -9,7 +9,7 @@ function Header() {
   React.useEffect(async () => {
     const countDataGetResponse = await axios.get("http://localhost:3001/data/orgCount");
     setCountData(countDataGetResponse.data);
-    console.log(countDataGetResponse.data);
+    //console.log(countDataGetResponse.data);
   }, []);
 
   const [voluntcountData, setvoluntCountData] = React.useState(undefined);
@@ -17,9 +17,16 @@ function Header() {
   React.useEffect(async () => {
     const voluntCountDataGetResponse = await axios.get("http://localhost:3001/data/voluntCount");
     setvoluntCountData(voluntCountDataGetResponse.data);
-    console.log(voluntCountDataGetResponse.data);
+    //console.log(voluntCountDataGetResponse.data);
   }, []);
 
+  // const [closedCaseCount, setclosedCaseCount] = React.useState(undefined);
+
+  // React.useEffect(async () => {
+  //   const closedCaseCountData = await axios.get("http://localhost:3001/data/voluntCount");
+  //   setvoluntCountData(closedCaseCountData.data);
+  //   console.log(closedCaseCountData.data);
+  // }, []);
 
   return (
     <>

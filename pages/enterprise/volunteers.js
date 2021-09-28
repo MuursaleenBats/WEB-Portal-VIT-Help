@@ -66,6 +66,7 @@ const Organizations = ({ sam }) => {
       Lat: "00.000",
       Lng: "00.000",
       Profession: "Employee",
+      serviceRole: "Volunteer",
       EnterpriseId: org.Id
     }
     const postResponse = await axios.post("http://localhost:3001/data/enterprise/orgvolunt", postData);

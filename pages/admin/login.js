@@ -89,7 +89,7 @@ function Login() {
 
               <a
                 className="text-black"
-                href="/enterprise/ResetPassword"
+                href="/admin/ResetPassword"
               //  onClick={(e) => e.preventDefault()}  // NEED TO ASSIGN APPROPRIATE FUNCTION
               >
                 <small>Forgot password?</small>
