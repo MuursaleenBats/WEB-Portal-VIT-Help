@@ -34,10 +34,17 @@ import Header from "components/Headers/EnterpriseHeader.js";
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
 
-  // const getCaseDetails = async (event) =>{
-  //   const getResponse = await axios.get("http://localhost:3001/data/activeCases");
-  //   console.log(getResponse.data);
-  // }
+  const [caseData, setCaseData] = React.useState(undefined);
+  const loadCaseData = async () => {
+    //var org = JSON.parse(localStorage.getItem("vh-org"));
+    const caseDataGetResponse = await axios.get("http://localhost:3001/data/activeCases",{
+      params: {
+        onlyAccepted: true,
+      }
+    });
+    setCaseData(caseDataGetResponse.data);
+  }
+  React.useEffect(loadCaseData, []);
 
   return (
     <>
@@ -63,12 +70,12 @@ const Organizations = ({sam}) => {
                   </tr>
                 </thead>
                 <tbody>
-                {Data.activeCases.map(reqDataP => (
-                  <tr key={reqDataP.caseId}>
-                    <td >{reqDataP.caseId}</td>
-                    <td >{reqDataP.caseDate}</td>
-                    <td >{reqDataP.volunteerName}</td>
-                    <td>{reqDataP.caseType}</td>
+                {caseData && caseData.map((thisCase, idx) => (
+                  <tr key={thisCase.Id}>
+                    <td >{thisCase.Id}</td>
+                    <td >{new Date(thisCase.TimeStamp).toDateString()}</td>
+                    <td >{thisCase.statuses[0].user.Name}</td>
+                    <td>{thisCase.helptype.HelpType}</td>
                     <td>
 
                     <Button outline
@@ -82,7 +89,7 @@ const Organizations = ({sam}) => {
                     >
                     <div className=" modal-header">
                       <h6 className=" modal-title" id="modal-title-default">
-                      Case Name Here
+                      Case Details
                       </h6>
                       <button
                         aria-label="Close"
@@ -95,10 +102,12 @@ const Organizations = ({sam}) => {
                     </div>
                     <div className=" modal-body">
                       <p>
-                        \\---  Case Details  ---//
+                        {/* \\---  Case Details  ---// */}
                       </p>
                       <p>
-                      \\---  Case Details  ---//
+                      Name of Distressed: {thisCase.Name}<br/>
+                      Phone Number: {thisCase.PhoneNumber}<br/>
+                      Address: {thisCase.Address}
                       </p>
 
                     </div>

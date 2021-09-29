@@ -57,6 +57,21 @@ const Organizations = ({sam}) => {
   }
   React.useEffect(loadOrgData, []);
 
+  const updateCaseStat = async (event, idx) => {
+    event.preventDefault();
+    //console.log(event);
+    const postData = {
+      Status: "Accepted",
+      serviceRole: "Volunteer",
+      CaseId: caseData[idx].Id,
+      UserId: volunteerData[idx].Id
+    }
+    console.log(postData.CaseId);
+    const postResponse = axios.post(`http://localhost:3001/data/updateCaseStat`, postData);
+    console.log(postResponse.data);
+    await loadCaseData();
+  }
+
   return (
     <>
       <Header />
@@ -100,9 +115,9 @@ const Organizations = ({sam}) => {
                     toggle={() => setModalDefaultOpen(false)}
                     >
                     <div className=" modal-header">
-                      <h6 className=" modal-title" id="modal-title-default">
-                      Case Name Here
-                      </h6>
+                      <h3 className=" modal-title" id="modal-title-default">
+                      Case Details
+                      </h3>
                       <button
                         aria-label="Close"
                         className=" close"
@@ -114,10 +129,12 @@ const Organizations = ({sam}) => {
                     </div>
                     <div className=" modal-body">
                       <p>
-                        \\---  Case Details  ---//
+                        {/* \\---  Case Details  ---// */}
                       </p>
                       <p>
-                      \\---  Case Details  ---//
+                      Name of Distressed: {thisCase.Name}<br/>
+                      Phone Number: {thisCase.PhoneNumber}<br/>
+                      Address: {thisCase.Address}
                       </p>
 
                     </div>
@@ -137,7 +154,9 @@ const Organizations = ({sam}) => {
                     </Modal>
                     </td>
                     <td>
-                    <Button outline color="success" type="submit">
+                    <Button outline color="success" 
+                    onClick={(event) => updateCaseStat(event, idx)}
+                    type="submit">
                           Accept Case
                     </Button>
                     </td>
