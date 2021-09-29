@@ -33,10 +33,30 @@ import Header from "components/Headers/EnterpriseHeader.js";
 
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
-  // const getCaseDetails = async (event) =>{
-  //   const getResponse = await axios.get("http://localhost:3001/data/cases");
-  //   console.log(getResponse.data);
-  // }
+  
+  const [caseData, setCaseData] = React.useState(undefined);
+  const loadCaseData = async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const caseDataGetResponse = await axios.get("http://localhost:3001/data/cases",{
+      params: {
+        onlyNotAccepted: true,
+        EnterpriseId: org.Id
+      }
+    });
+    setCaseData(caseDataGetResponse.data);
+    //console.log(caseDataGetResponse.data);
+  }
+  React.useEffect(loadCaseData, []);
+
+  const [volunteerData, setVolunteerData] = React.useState(undefined);
+  const loadOrgData = async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const volunteerDataGetResponse = await axios.get(`http://localhost:3001/data/orgvolunt/${org.Id}`);
+    setVolunteerData(volunteerDataGetResponse.data);
+    //console.log(volunteerDataGetResponse.data);
+  }
+  React.useEffect(loadOrgData, []);
+
   return (
     <>
       <Header />
@@ -61,13 +81,14 @@ const Organizations = ({sam}) => {
                   </tr>
                 </thead>
                 <tbody>
-                {Data.caseNotification.map(reqDataP => (
-                  <tr key={reqDataP.caseId}>
-                    <td >{reqDataP.caseId}</td>
-                    <td >{reqDataP.caseDate}</td>
-                    <td >{reqDataP.volunteerName}</td>
-                    <td>{reqDataP.caseType}</td>
-                    <td>
+                {caseData && caseData.map((thisCase, idx) => (
+                    volunteerData && volunteerData.map((volunteer, idx) => (
+                    <tr key={thisCase.Id && volunteer.Id}>
+                      <td >{thisCase.Id}</td>
+                      <td >{new Date(thisCase.TimeStamp).toDateString()}</td>
+                      <td >{volunteer.Name}</td>
+                      <td >{thisCase.helptype.HelpType}</td>
+                      <td>
 
                     <Button outline
                     onClick={() => setModalDefaultOpen(true)}
@@ -127,7 +148,7 @@ const Organizations = ({sam}) => {
 
 
                   </tr>
-                ))}
+                ))))}
                 </tbody>
               </Table>
 
