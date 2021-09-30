@@ -106,9 +106,9 @@ const Organizations = ({sam}) => {
                         {/* \\---  Case Details  ---// */}
                       </p>
                       <p>
-                      Name of Distressed: {thisCase.Name}<br/>
-                      Phone Number: {thisCase.PhoneNumber}<br/>
-                      Address: {thisCase.Address}
+                      <b>Name of Distressed:</b> {thisCase.Name}<br/>
+                      <b>Phone Number:</b> {thisCase.PhoneNumber}<br/>
+                      <b>Address:</b> {thisCase.Address}
                       </p>
 
                     </div>

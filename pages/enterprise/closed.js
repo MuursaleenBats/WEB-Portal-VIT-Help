@@ -88,9 +88,9 @@ const Organizations = ({sam}) => {
                     toggle={() => setModalDefaultOpen(false)}
                     >
                     <div className=" modal-header">
-                      <h6 className=" modal-title" id="modal-title-default">
-                      Case Name Here
-                      </h6>
+                      <h3 className=" modal-title" id="modal-title-default">
+                      Case Details
+                      </h3>
                       <button
                         aria-label="Close"
                         className=" close"
@@ -102,10 +102,12 @@ const Organizations = ({sam}) => {
                     </div>
                     <div className=" modal-body">
                       <p>
-                        \\---  Case Details  ---//
+                        {/* \\---  Case Details  ---// */}
                       </p>
                       <p>
-                      \\---  Case Details  ---//
+                      <b>Name of Distressed:</b> {thisCase.Name}<br/>
+                      <b>Phone Number:</b> {thisCase.PhoneNumber}<br/>
+                      <b>Address:</b> {thisCase.Address}
                       </p>
 
                     </div>
