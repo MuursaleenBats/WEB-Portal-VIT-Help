@@ -36,8 +36,13 @@ const Organizations = ({sam}) => {
 
   const [caseData, setCaseData] = React.useState(undefined);
   const loadCaseData = async () => {
-    //var org = JSON.parse(localStorage.getItem("vh-org"));
-    const caseDataGetResponse = await axios.get("http://localhost:3001/data/closedCases");
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const caseDataGetResponse = await axios.get("http://localhost:3001/data/closedCases",{
+      params: {
+        onlyAccepted: true,
+        EnterpriseId: org.Id
+      }
+    });
     setCaseData(caseDataGetResponse.data);
   }
   React.useEffect(loadCaseData, []);

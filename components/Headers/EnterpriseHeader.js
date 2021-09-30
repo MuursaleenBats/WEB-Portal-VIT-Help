@@ -1,5 +1,5 @@
 import React from "react";
-import Data from "variables/variable.js";
+//import Data from "variables/variable.js";
 import axios from "axios";
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
@@ -14,21 +14,47 @@ function EnterpriseHeader() {
     //console.log(voluntCountDataGetResponse.data);
   }, []);
 
-  // const [closedCaseCount, setclosedCaseCount] = React.useState(undefined);
+  const [closedCaseCount, setvoluntCountData] = React.useState(undefined);
 
-  // React.useEffect(async () => {
-  //   const closedCaseCountData = await axios.get("http://localhost:3001/data/closedCasesCount");
-  //   setvoluntCountData(closedCaseCountData.data);
-  //   console.log(closedCaseCountData.data);
-  // }, []);
+  React.useEffect(async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const closedCaseCountData = await axios.get("http://localhost:3001/data/closedCasesCount",{
+      params: {
+        onlyAccepted: true,
+        EnterpriseId: org.Id
+      }
+    });
+    setvoluntCountData(closedCaseCountData.data);
+    //console.log(closedCaseCountData.data);
+  }, []);
 
-  // const [activeCaseCount, setactiveCaseCount] = React.useState(undefined);
+   const [activeCaseCount, setactiveCountData] = React.useState(undefined);
 
-  // React.useEffect(async () => {
-  //   const activeCaseCountData = await axios.get("http://localhost:3001/data/activeCasesCount");
-  //   setactiveCountData(activeCaseCountData.data);
-  //   console.log(activeCaseCountData.data);
-  // }, []);
+   React.useEffect(async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const activeCaseCountData = await axios.get("http://localhost:3001/data/activeCasesCount",{
+      params: {
+        onlyAccepted: true,
+        EnterpriseId: org.Id
+      }
+    });
+    setactiveCountData(activeCaseCountData.data);
+    //console.log(activeCaseCountData.data);
+  }, []);
+
+  const [totalCaseCount, setTotalCountData] = React.useState(undefined);
+
+  React.useEffect(async () => {
+   var org = JSON.parse(localStorage.getItem("vh-org"));
+   const totalCaseCountData = await axios.get("http://localhost:3001/data/orgTotalCasesCount",{
+     params: {
+       onlyAccepted: true,
+       EnterpriseId: org.Id
+     }
+   });
+   setTotalCountData(totalCaseCountData.data);
+   //console.log(totalCaseCountData.data);
+ }, []);
 
   return (
     <>
@@ -73,7 +99,7 @@ function EnterpriseHeader() {
                         >
                           No of Cases Solved
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{Data.enterpriseStatistic.noOfCaseSolved}</span>
+                        <span className="h2 font-weight-bold mb-0">{closedCaseCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-success text-white rounded-circle shadow">
@@ -96,7 +122,7 @@ function EnterpriseHeader() {
                         >
                           Total No of Cases
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{Data.enterpriseStatistic.totalNoOfCases}</span>
+                        <span className="h2 font-weight-bold mb-0">{totalCaseCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -119,7 +145,7 @@ function EnterpriseHeader() {
                         >
                           No of Active Cases
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{Data.enterpriseStatistic.noOfActiveCases}</span>
+                        <span className="h2 font-weight-bold mb-0">{activeCaseCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-red text-white rounded-circle shadow">

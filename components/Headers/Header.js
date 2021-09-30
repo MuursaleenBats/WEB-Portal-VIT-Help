@@ -20,13 +20,31 @@ function Header() {
     //console.log(voluntCountDataGetResponse.data);
   }, []);
 
-  // const [closedCaseCount, setclosedCaseCount] = React.useState(undefined);
+  const [closedCaseCount, setCaseCountData] = React.useState(undefined);
 
-  // React.useEffect(async () => {
-  //   const closedCaseCountData = await axios.get("http://localhost:3001/data/voluntCount");
-  //   setvoluntCountData(closedCaseCountData.data);
-  //   console.log(closedCaseCountData.data);
-  // }, []);
+  React.useEffect(async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const closedCaseCountData = await axios.get("http://localhost:3001/data/totalClosedCasesCount",{
+      params: {
+        onlyAccepted: true,
+      }
+    });
+    setCaseCountData(closedCaseCountData.data);
+    //console.log(closedCaseCountData.data);
+  }, []);
+
+  const [totalCaseCount, setTotalCountData] = React.useState(undefined);
+
+  React.useEffect(async () => {
+   var org = JSON.parse(localStorage.getItem("vh-org"));
+   const totalCaseCountData = await axios.get("http://localhost:3001/data/TotalCasesCount",{
+     params: {
+       onlyAccepted: true
+     }
+   });
+   setTotalCountData(totalCaseCountData.data);
+   //console.log(totalCaseCountData.data);
+ }, []);
 
   return (
     <>
@@ -71,7 +89,7 @@ function Header() {
                         >
                           No of Cases Solved
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{Data.adminStatistic.noOfCaseSolved}</span>
+                        <span className="h2 font-weight-bold mb-0">{closedCaseCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -94,7 +112,7 @@ function Header() {
                         >
                           Total No of Cases
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">{Data.adminStatistic.totalNoOfCases}</span>
+                        <span className="h2 font-weight-bold mb-0">{totalCaseCount}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
