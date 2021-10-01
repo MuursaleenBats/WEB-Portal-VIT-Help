@@ -48,7 +48,11 @@ const Organizations = ({ sam }) => {
   const [volunteerData, setVolunteerData] = React.useState(undefined);
   const loadOrgData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const volunteerDataGetResponse = await axios.get(`http://localhost:3001/data/orgvolunt/${org.Id}`);
+    const volunteerDataGetResponse = await axios.get(`http://localhost:3001/data/orgvolunt/${org.Id}`,{
+      params:{
+        includeCaseCount: true
+      }
+    });
     setVolunteerData(volunteerDataGetResponse.data);
   }
   React.useEffect(loadOrgData, []);
@@ -211,7 +215,7 @@ const Organizations = ({ sam }) => {
                       <td >{volunteer.Id}</td>
                       <td >{volunteer.Name}</td>
                       <td >{volunteer.Age}</td>
-                      <td >{0}</td>
+                      <td >{volunteer.volCount}</td>
                       <td>
 
 
