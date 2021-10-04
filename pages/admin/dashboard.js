@@ -6,6 +6,7 @@ import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
+import axios from 'axios';
 import {
   Button,
   Card,
@@ -35,6 +36,30 @@ import Header from "components/Headers/Header.js";
 const Dashboard = (props) => {
   const [activeNav, setActiveNav] = React.useState(1);
   const [chartExample1Data, setChartExample1Data] = React.useState("data1");
+  
+  const [graphData, setGraphData] = React.useState(undefined);
+  const loadGraphData = async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const graphDDataGetResponse = await axios.get(`http://localhost:3001/data/totalCasesByMonth`,{
+      params:{
+        onlyAccepted: true
+      }
+    });
+    setGraphData(graphDDataGetResponse.data);
+  }
+  React.useEffect(loadGraphData, []);
+
+  const [barData, setBarData] = React.useState(undefined);
+  const loadBarData = async () => {
+    var org = JSON.parse(localStorage.getItem("vh-org"));
+    const barDataGetResponse = await axios.get(`http://localhost:3001/data/solvedCasesByMonth`,{
+      params:{
+        onlyAccepted: true
+      }
+    });
+    setBarData(barDataGetResponse.data);
+  }
+  React.useEffect(loadBarData, []);
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
@@ -95,11 +120,23 @@ const Dashboard = (props) => {
               <CardBody>
                 {/* Chart */}
                 <div className="chart">
-                  <Line
-                    data={chartExample1[chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
-                  />
+                {graphData &&
+                    <Line
+                      data={(canvas) => {
+                        return {
+                          labels: Object.keys(graphData),
+                          datasets: [
+                            {
+                              label: "Solved Cases",
+                              data: Object.values(graphData),
+                            },
+                          ],
+                        };
+                      }}
+                      options={chartExample1.options}
+                      getDatasetAtEvent={(e) => console.log(e)}
+                    />
+                  }
 
                 </div>
               </CardBody>
@@ -121,9 +158,20 @@ const Dashboard = (props) => {
                 {/* Chart */}
                 <div className="chart">
                   <Bar
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  />
+                      data={(canvas) => {
+                        return {
+                          labels: Object.keys(barData),
+                          datasets: [
+                            {
+                              label: "Solved Cases",
+                              data: Object.values(barData),
+                            },
+                          ],
+                        };
+                      }}
+                      options={chartExample1.options}
+                      getDatasetAtEvent={(e) => console.log(e)}
+                    />
                 </div>
               </CardBody>
             </Card>
