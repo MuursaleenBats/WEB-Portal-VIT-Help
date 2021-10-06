@@ -46,7 +46,7 @@ const Admins = ({sam}) => {
 
  const handleSubmit = async (event) =>{
   event.preventDefault();
-  console.log(event);
+  //console.log(event);
   const postData = {
     Name:  event.target[0].value,
     mobile_no: parseInt(event.target[1].value),
@@ -54,9 +54,24 @@ const Admins = ({sam}) => {
     Address: event.target[3].value,
     pass: event.target[4].value,
   }
-  const postResponse = await axios.post("http://localhost:3001/data/admin", postData);
-  console.log(postResponse.data);
-  }
+  if(event.target[0].value===""){
+    alert("Please enter data in all fields")
+  } else if(event.target[1].value ===""){
+    alert("Please enter data in all fields")
+  } else if(event.target[2].value==="")
+  {
+    alert("Please enter data in all fields")
+  } else if(event.target[3].value ==="")
+  {
+    alert("Please enter data in all fields")
+  } else if(event.target[4].value==="")
+  {
+       alert("Please enter data in all fields")
+  }else{
+      const postResponse = await axios.post("http://localhost:3001/data/admin", postData);
+      console.log(postResponse.data);
+    }
+ }
 
 const [adminData, setAdminData] = React.useState(undefined);
 
@@ -172,18 +187,7 @@ const deleteAdminByIndex = async (event, index) => {
                              </InputGroup>
                            </FormGroup>
 
-                           <div className=" custom-file">
-          <input
-            className=" custom-file-input"
-            id="customFileLang"
-            lang="en"
-            type="file"
-          ></input>
-          <label className=" custom-file-label" htmlFor="customFileLang">
-            File If Any
-          </label>
-        </div>
-                    <div className=" text-center">
+                     <div className=" text-center">
                       <Button className=" my-4" color="warning" type="submit">
                         ADD
                       </Button>

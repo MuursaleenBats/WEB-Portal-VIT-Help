@@ -17,8 +17,18 @@ import {
   Container,
   Media,
 } from "reactstrap";
+import { useRouter } from "next/router";
 
 function EnterpriseNavbar({ brandText }) {
+
+  const router = useRouter();
+  const logout = (e) => {
+    e.preventDefault();
+    window.localStorage.clear();
+    // window.localStorage.removeItem("vh-org");
+    router.push("/enterprise/login");
+  };
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -79,7 +89,7 @@ function EnterpriseNavbar({ brandText }) {
                 <span>View Profile</span>
               </DropdownItem>
 
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={logout}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

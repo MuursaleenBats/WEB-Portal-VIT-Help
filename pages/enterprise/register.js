@@ -31,8 +31,26 @@ function Register() {
       phoneNumber: parseInt(event.target[4].value),
       password: event.target[5].value
     }
-    const postResponse = await axios.post("http://localhost:3001/data/enterprise", postData);
-    console.log(postResponse.data);
+    if(event.target[0].value===""){
+      alert("Please enter data in all fields")
+    } else if(event.target[1].value ===""){
+      alert("Please enter data in all fields")
+    } else if(event.target[2].value==="")
+    {
+      alert("Please enter data in all fields")
+    } else if(event.target[3].value ==="")
+    {
+      alert("Please enter data in all fields")
+    } else if(event.target[4].value==="")
+    {
+      alert("Please enter data in all fields")
+    }else if(event.target[5].value==""){
+      alert("Please enter data in all fields")
+    }else{
+      const postResponse = await axios.post("http://localhost:3001/data/enterprise", postData);
+      console.log(postResponse.data);
+      window.href="/enterprise/login";
+    }
   }
   return (
     <>
@@ -66,7 +84,7 @@ function Register() {
                     </InputGroupText>
                   </InputGroupAddon>
  <Input size="sm" type="select">
-        <option value="Option One" >Organization type</option>
+        <option value="option one">Organization type</option>
         <option value="NGO" >NGO</option>
         <option value="HOSPITAL" >HOSPITAL</option>
         <option value="POLICE STATION" >POLICE STATION</option>

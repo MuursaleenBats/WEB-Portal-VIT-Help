@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // reactstrap components
 import {
@@ -19,7 +19,16 @@ import {
 import Auth from "layouts/Auth.js";
 import axios from "axios";
 
+import {useRouter} from "next/router";
+
 function Login() {
+
+  const router = useRouter();
+  useEffect(() => {
+    if(window.localStorage.getItem("vh-org")) {
+      router.push("/enterprise/dashboard");
+    }
+  });
 
   const handleSubmit = async (event) =>{
     event.preventDefault();
