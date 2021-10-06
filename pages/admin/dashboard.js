@@ -80,46 +80,16 @@ const Dashboard = (props) => {
             <Card className="shadow">
               <CardHeader className="bg-transparent">
                 <Row className="align-items-center">
-                <div className="col">
-                                    <h6 className="text-uppercase text-light ls-1 mb-1">
-                                      Overview
-                                    </h6>
-                                    <h2 className="text-black mb-0">Total Cases</h2>
-                                  </div>
                   <div className="col">
-                    <Nav className="justify-content-end" pills>
-                      <NavItem>
-                        <NavLink
-                          className={classnames("py-2 px-3", {
-                            active: activeNav === 1,
-                          })}
-                          href="#pablo"
-                          onClick={(e) => toggleNavs(e, 1)}
-                        >
-                          <span className="d-none d-md-block">Month</span>
-                          <span className="d-md-none">M</span>
-                        </NavLink>
-                      </NavItem>
-                      <NavItem>
-                        <NavLink
-                          className={classnames("py-2 px-3", {
-                            active: activeNav === 2,
-                          })}
-                          data-toggle="tab"
-                          href="#pablo"
-                          onClick={(e) => toggleNavs(e, 2)}
-                        >
-                          <span className="d-none d-md-block">Week</span>
-                          <span className="d-md-none">W</span>
-                        </NavLink>
-                      </NavItem>
-                    </Nav>
+                    <h6 className="text-uppercase text-light ls-1 mb-1">
+                      Overview
+                    </h6>
+                    <h2 className="text-black mb-0">Total Cases</h2>
                   </div>
                 </Row>
               </CardHeader>
               <CardBody>
-                {/* Chart */}
-                <div className="chart">
+                {/* Chart */}       <div className="chart">
                 {graphData &&
                     <Line
                       data={(canvas) => {
@@ -127,7 +97,7 @@ const Dashboard = (props) => {
                           labels: Object.keys(graphData),
                           datasets: [
                             {
-                              label: "Solved Cases",
+                              label: "Total Cases",
                               data: Object.values(graphData),
                             },
                           ],
@@ -157,13 +127,14 @@ const Dashboard = (props) => {
               <CardBody>
                 {/* Chart */}
                 <div className="chart">
-                  <Bar
+                {barData &&
+                    <Bar
                       data={(canvas) => {
                         return {
                           labels: Object.keys(barData),
                           datasets: [
                             {
-                              label: "Solved Cases",
+                              label: "Total Cases",
                               data: Object.values(barData),
                             },
                           ],
@@ -172,6 +143,7 @@ const Dashboard = (props) => {
                       options={chartExample1.options}
                       getDatasetAtEvent={(e) => console.log(e)}
                     />
+                  }
                 </div>
               </CardBody>
             </Card>

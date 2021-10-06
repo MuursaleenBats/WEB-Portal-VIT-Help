@@ -97,7 +97,7 @@ const Dashboard = (props) => {
                           labels: Object.keys(graphData),
                           datasets: [
                             {
-                              label: "Solved Cases",
+                              label: "Total Cases",
                               data: Object.values(graphData),
                             },
                           ],
