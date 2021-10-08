@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 // reactstrap components
 import {
   DropdownMenu,
@@ -19,6 +20,13 @@ import {
 } from "reactstrap";
 
 function AdminNavbar({ brandText }) {
+  const router = useRouter();
+  const logout = (e) => {
+    e.preventDefault();
+    window.localStorage.clear();
+    // window.localStorage.removeItem("vh-org");
+    router.push("/admin/login");
+  };
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -61,7 +69,7 @@ function AdminNavbar({ brandText }) {
 
 
 
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem href="#pablo" onClick={logout}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

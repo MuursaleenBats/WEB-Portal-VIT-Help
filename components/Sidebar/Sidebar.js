@@ -41,12 +41,7 @@ var ps;
 function Sidebar(props) {
   // used for checking current route
   const router = useRouter();
-  const logout = (e) => {
-    e.preventDefault();
-    window.localStorage.clear();
-    // window.localStorage.removeItem("vh-org");
-    router.push("/enterprise/login");
-  };
+  
   
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   // verifies if routeName is the one active (in browser input)
@@ -143,7 +138,7 @@ function Sidebar(props) {
             <DropdownMenu className="dropdown-menu-arrow" right>
 
 
-              <DropdownItem href="#pablo" onClick={logout}>
+              <DropdownItem href="#pablo" onClick={(e)=>e.preventDefault()}>
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
               </DropdownItem>

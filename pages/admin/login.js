@@ -18,8 +18,17 @@ import {
 // layout for this page
 import Auth from "layouts/Auth.js";
 import axios from "axios";
+import {useRouter} from "next/router";
 
 function Login() {
+
+  const router = useRouter();
+  useEffect(() => {
+    if(window.localStorage.getItem("vh-admin")) {
+      router.push("/admin/dashboard");
+    }
+  });
+
   const handleSubmit = async (event) =>{
     event.preventDefault();
       const postData = {
@@ -40,6 +49,7 @@ function Login() {
          
         }
         else{
+         localStorage.setItem("vh-admin", JSON.stringify(getResponse.data));
          window.location.href="/admin/dashboard";
         }
      }
