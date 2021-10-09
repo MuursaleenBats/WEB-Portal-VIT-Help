@@ -36,7 +36,7 @@ function Login() {
         Email: event.target[0].value,
         password: event.target[1].value
     }
-    const getResponse = await axios.get(`http://localhost:3001/data/enterprise/${postData.Email}`);
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprise/${postData.Email}`);
     if(getResponse.data === null){
       alert("Please enter valid email id")
     }else{

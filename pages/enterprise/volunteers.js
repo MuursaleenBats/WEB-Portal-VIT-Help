@@ -48,7 +48,7 @@ const Organizations = ({ sam }) => {
   const [volunteerData, setVolunteerData] = React.useState(undefined);
   const loadOrgData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const volunteerDataGetResponse = await axios.get(`http://localhost:3001/data/orgvolunt/${org.Id}`,{
+    const volunteerDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/orgvolunt/${org.Id}`,{
       params:{
         includeCaseCount: true
       }
@@ -73,9 +73,24 @@ const Organizations = ({ sam }) => {
       serviceRole: "Volunteer",
       EnterpriseId: org.Id
     }
-    const postResponse = await axios.post("http://localhost:3001/data/enterprise/orgvolunt", postData);
+    if(event.target[0].value===""){
+      alert("Please enter data in all fields")
+    } else if(event.target[1].value ===""){
+      alert("Please enter data in all fields")
+    } else if(event.target[2].value==="")
+    {
+      alert("Please enter data in all fields")
+    } else if(event.target[3].value ==="")
+    {
+      alert("Please enter data in all fields")
+    } else if(event.target[4].value==="")
+    {
+         alert("Please enter data in all fields")
+    }else{
+    const postResponse = await axios.post("http://65.2.142.67:3001/data/enterprise/orgvolunt", postData);
     console.log(postResponse.data);
     await loadOrgData();
+    }
   }
   
   const updateVol = async (event, idx) => {
@@ -88,14 +103,14 @@ const Organizations = ({ sam }) => {
        && {Age: new Date().getYear() - new Date(event.target[2].value).getYear()},
       ...(event.target[3].value) && {Address: event.target[3].value},
     }
-    const postResponse = await axios.patch(`http://localhost:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
+    const postResponse = await axios.patch(`http://65.2.142.67:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
     console.log(postResponse.data);
     await loadOrgData();
   }
   
   const deleteVolunteerByIndex = async (event, index) => {
     event.preventDefault();
-    const postResponse = await axios.delete(`http://localhost:3001/data/deleteVolunt/${volunteerData[index].Id}`);
+    const postResponse = await axios.delete(`http://65.2.142.67:3001/data/deleteVolunt/${volunteerData[index].Id}`);
     // console.log(postResponse.data);
     await loadOrgData();
   }

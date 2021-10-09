@@ -24,7 +24,7 @@ function ResetPassword() {
       const postData = {
         mobile_no : event.target[0].value
     }
-    const getResponse = await axios.get(`http://localhost:3001/data/adminPhone/${postData.mobile_no}`);
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/adminPhone/${postData.mobile_no}`);
     //console.log(getResponse.data);
     if(getResponse.data.length === 0){
       alert("Please enter valid phone number");

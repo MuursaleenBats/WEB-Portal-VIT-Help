@@ -44,43 +44,45 @@ const Admins = ({sam}) => {
  const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
  const [modalShowOpen, setModalShowOpen] = React.useState(false);
 
- const handleSubmit = async (event) =>{
-  event.preventDefault();
-  //console.log(event);
-  const postData = {
-    Name:  event.target[0].value,
-    mobile_no: parseInt(event.target[1].value),
-    Email: event.target[2].value,
-    Address: event.target[3].value,
-    pass: event.target[4].value,
+ 
+ const [adminData, setAdminData] = React.useState(undefined);
+ 
+ const loadAdminData = async () => {
+   const adminDataGetResponse = await axios.get("http://65.2.142.67:3001/data/adminData");
+   setAdminData(adminDataGetResponse.data);
   }
-  if(event.target[0].value===""){
-    alert("Please enter data in all fields")
-  } else if(event.target[1].value ===""){
-    alert("Please enter data in all fields")
-  } else if(event.target[2].value==="")
-  {
-    alert("Please enter data in all fields")
-  } else if(event.target[3].value ==="")
-  {
-    alert("Please enter data in all fields")
-  } else if(event.target[4].value==="")
-  {
-       alert("Please enter data in all fields")
-  }else{
-      const postResponse = await axios.post("http://localhost:3001/data/admin", postData);
-      console.log(postResponse.data);
-    }
- }
-
-const [adminData, setAdminData] = React.useState(undefined);
-
-const loadAdminData = async () => {
-  const adminDataGetResponse = await axios.get("http://localhost:3001/data/adminData");
-  setAdminData(adminDataGetResponse.data);
-}
-
-React.useEffect(loadAdminData, []);
+  
+  React.useEffect(loadAdminData, []);
+  
+  const handleSubmit = async (event) =>{
+   event.preventDefault();
+   //console.log(event);
+   const postData = {
+     Name:  event.target[0].value,
+     mobile_no: parseInt(event.target[1].value),
+     Email: event.target[2].value,
+     Address: event.target[3].value,
+     pass: event.target[4].value,
+   }
+   if(event.target[0].value===""){
+     alert("Please enter data in all fields")
+   } else if(event.target[1].value ===""){
+     alert("Please enter data in all fields")
+   } else if(event.target[2].value==="")
+   {
+     alert("Please enter data in all fields")
+   } else if(event.target[3].value ==="")
+   {
+     alert("Please enter data in all fields")
+   } else if(event.target[4].value==="")
+   {
+        alert("Please enter data in all fields")
+   }else{
+       const postResponse = await axios.post("http://65.2.142.67:3001/data/admin", postData);
+       console.log(postResponse.data);
+       await loadAdminData();
+     }
+  }
 
 const updateAdmin = async (event, idx) => {
   event.preventDefault();
@@ -91,14 +93,14 @@ const updateAdmin = async (event, idx) => {
     ...(event.target[3].value) && {Email: event.target[3].value},
     ...(event.target[4].value) && {Address: event.target[4].value},    
   }
-  const postResponse = await axios.patch(`http://localhost:3001/data/updateAdmin/${adminData[idx].Id}`, postData);
+  const postResponse = await axios.patch(`http://65.2.142.67:3001/data/updateAdmin/${adminData[idx].Id}`, postData);
   console.log(postResponse.data);
   await loadAdminData();
 }
 
 const deleteAdminByIndex = async (event, index) => {
   event.preventDefault();
-  const postResponse = await axios.delete(`http://localhost:3001/data/deleteAdmin/${adminData[index].Id}`);
+  const postResponse = await axios.delete(`http://65.2.142.67:3001/data/deleteAdmin/${adminData[index].Id}`);
   // console.log(postResponse.data);
   await loadAdminData();
 }
@@ -280,17 +282,6 @@ const deleteAdminByIndex = async (event, index) => {
                                <Input placeholder={admindata.Address} type="text"></Input>
                              </InputGroup>
                            </FormGroup>
-                          <div className=" custom-file">
-                          <input
-                          className=" custom-file-input"
-                          id="customFileLang"
-                          lang="en"
-                          type="file"
-                          ></input>
-                          <label className=" custom-file-label" htmlFor="customFileLang">
-                          File If Any
-                          </label>
-                          </div>
                           <div className=" text-center">
 
                           </div>
@@ -373,17 +364,6 @@ const deleteAdminByIndex = async (event, index) => {
                                <Input placeholder={admindata.Address} type="text"></Input>
                              </InputGroup>
                            </FormGroup>
-                    <div className=" custom-file">
-                    <input
-                    className=" custom-file-input"
-                    id="customFileLang"
-                    lang="en"
-                    type="file"
-                    ></input>
-                    <label className=" custom-file-label" htmlFor="customFileLang">
-                    File If Any
-                    </label>
-                    </div>
                     <div className=" text-center">
                     <Button className=" my-4" color="warning"
                     type="submit">

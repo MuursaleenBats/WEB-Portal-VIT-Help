@@ -25,7 +25,7 @@ function ResetPassword() {
       const postData = {
         phoneNumber : event.target[0].value
     }
-    const getResponse = await axios.get(`http://localhost:3001/data/enterprisePhone/${postData.phoneNumber}`);
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.phoneNumber}`);
     //console.log(getResponse.data);
     if(getResponse.data.length === 0){
 

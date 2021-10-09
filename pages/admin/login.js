@@ -35,7 +35,7 @@ function Login() {
       phoneNumber: parseInt(event.target[0].value),
       password: event.target[1].value
     }
-    const getResponse = await axios.get(`http://localhost:3001/data/admin/${postData.phoneNumber}`);
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/admin/${postData.phoneNumber}`);
     console.log(getResponse.data);
     if(getResponse.data === null){
       alert("Please enter data")

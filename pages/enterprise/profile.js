@@ -55,8 +55,10 @@ const Profile = ({sam}) => {
       //...(event.target[1].value) && {phoneNumber: event.target[1].value},
       ...(event.target[2].value) && {Email: event.target[2].value},
     }
-    const postResponse = await axios.patch(`http://localhost:3001/data/enterprise/${orgData.NameofOrg}`, postData);
+    const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprise/${orgData.NameofOrg}`, postData);
     console.log(postResponse.data);
+    alert("Please login again to see updated details");
+    await loadOrgData();
   }
 
   return (
@@ -75,7 +77,7 @@ const Profile = ({sam}) => {
             <Col md={6}>
               <FormGroup>
                 <Label >Type</Label>
-                <Input type="text" name="type" id="typeOfOrganization" placeholder="Type Of Organization" />
+                <Input type="text" name="type" id="typeOfOrganization" placeholder={orgData ? orgData.orgType:"Type"} />
               </FormGroup>
             </Col>
           <Col md={6}>

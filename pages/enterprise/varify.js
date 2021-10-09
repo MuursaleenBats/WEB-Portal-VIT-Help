@@ -30,9 +30,10 @@ function varify() {
     const postData = {
       password: pass
     }
-    const postResponse = await axios.patch(`http://localhost:3001/data/enterprisephnNo/${vol[0].phoneNumber}`,postData);
+    const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprisephnNo/${vol[0].phoneNumber}`,postData);
     console.log(postResponse.data);
     alert("Password Updated");
+    window.location.href="/enterprise/login";
     //await loadOrgData();
   }
 

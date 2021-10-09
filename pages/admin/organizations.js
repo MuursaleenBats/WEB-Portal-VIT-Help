@@ -37,7 +37,7 @@ const Organizations = ({sam}) => {
   const [orgData, setOrgData] = React.useState(undefined);
 
   const loadOrgData = async () => {
-    const orgDataGetResponse = await axios.get("http://localhost:3001/data/orgDataStatus", {
+    const orgDataGetResponse = await axios.get("http://65.2.142.67:3001/data/orgDataStatus", {
       params: {
         includeVolCount: true,
       }
@@ -49,7 +49,7 @@ const Organizations = ({sam}) => {
 
   const deleteOrgByIndex = async (event, index) =>{
     event.preventDefault();
-    const postResponse = await axios.delete(`http://localhost:3001/data/deleteOrg/${orgData[index].Id}`);
+    const postResponse = await axios.delete(`http://65.2.142.67:3001/data/deleteOrg/${orgData[index].Id}`);
     // console.log(postResponse.data);
     await loadOrgData();
   }
@@ -96,9 +96,9 @@ const Organizations = ({sam}) => {
                     toggle={() => setModalDefaultOpen(false)}
                     >
                     <div className=" modal-header">
-                      <h6 className=" modal-title" id="modal-title-default">
-                      {orgData.NameofOrg}
-                      </h6>
+                      <h3 className=" modal-title" id="modal-title-default">
+                      {orgdata.NameofOrg}
+                      </h3>
                       <button
                         aria-label="Close"
                         className=" close"
@@ -110,9 +110,6 @@ const Organizations = ({sam}) => {
                     </div>
                     <div className=" modal-body">
                       <p>
-                        {/* \\---  Organizations Details  ---// */}
-                      </p>
-                      <p>
                       Id: {orgdata.Id}<br/>
                       Name: {orgdata.NameofOrg}<br/>
                       Email: {orgdata.Email}<br/>
@@ -122,9 +119,6 @@ const Organizations = ({sam}) => {
 
                     </div>
                     <div className=" modal-footer">
-                      <Button color="primary" type="button">
-                        Document
-                      </Button>
                       <Button
                         className=" ml-auto"
                         color="link"

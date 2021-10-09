@@ -37,7 +37,7 @@ const Organizations = ({sam}) => {
   const [caseData, setCaseData] = React.useState(undefined);
   const loadCaseData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const caseDataGetResponse = await axios.get("http://localhost:3001/data/closedCases",{
+    const caseDataGetResponse = await axios.get("http://65.2.142.67:3001/data/closedCases",{
       params: {
         onlyAccepted: true,
         EnterpriseId: org.Id
@@ -112,9 +112,7 @@ const Organizations = ({sam}) => {
 
                     </div>
                     <div className=" modal-footer">
-                      <Button color="success" type="button">
-                        Document if any
-                      </Button>
+                      
                       <Button
                         className=" ml-auto"
                         color="link"
