@@ -41,8 +41,8 @@ import axios from "axios";
 const Admins = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
  const [modalFormOpen, setModalFormOpen] = React.useState(false);
- const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
- const [modalShowOpen, setModalShowOpen] = React.useState(false);
+ const [modalUpdateOpen, setModalUpdateOpen] = React.useState(-1);
+ const [modalShowOpen, setModalShowOpen] = React.useState(-1);
 
  
  const [adminData, setAdminData] = React.useState(undefined);
@@ -223,11 +223,11 @@ const deleteAdminByIndex = async (event, index) => {
 
 
                     <Button outline
-                    onClick={() => setModalShowOpen(true)}
+                    onClick={() => setModalShowOpen(idx)}
                     color="primary" type="button">
                             Show Details
                           </Button>
-                          <Modal isOpen={modalShowOpen} toggle={() => setModalShowOpen(false)}>
+                          <Modal isOpen={modalShowOpen === idx} toggle={() => setModalShowOpen(-1)}>
                           <div className=" modal-body p-0">
                           <Card className=" bg-secondary shadow border-0">
                           <CardHeader className=" bg-white pb-5">
@@ -294,11 +294,11 @@ const deleteAdminByIndex = async (event, index) => {
                     <td>
 
                     <Button outline
-                    onClick={() => setModalUpdateOpen(true)}
+                    onClick={() => setModalUpdateOpen(idx)}
                     color="success" type="button">
                     Update Details
                     </Button>
-                    <Modal isOpen={modalUpdateOpen} toggle={() => setModalUpdateOpen(false)}>
+                    <Modal isOpen={modalUpdateOpen === idx} toggle={() => setModalUpdateOpen(-1)}>
                     <div className=" modal-body p-0">
                     <Card className=" bg-secondary shadow border-0">
                     <CardHeader className=" bg-white pb-5">

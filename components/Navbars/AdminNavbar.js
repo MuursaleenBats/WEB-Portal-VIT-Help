@@ -23,7 +23,7 @@ function AdminNavbar({ brandText }) {
   const router = useRouter();
   const logout = (e) => {
     e.preventDefault();
-    window.localStorage.clear();
+    window.localStorage.removeItem("vh-admin");
     // window.localStorage.removeItem("vh-org");
     router.push("/admin/login");
   };

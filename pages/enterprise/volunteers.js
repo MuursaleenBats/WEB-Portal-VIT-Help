@@ -42,8 +42,8 @@ import Header from "components/Headers/EnterpriseHeader.js";
 const Organizations = ({ sam }) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
   const [modalFormOpen, setModalFormOpen] = React.useState(false);
-  const [modalUpdateOpen, setModalUpdateOpen] = React.useState(false);
-  const [modalShowOpen, setModalShowOpen] = React.useState(false);
+  const [modalUpdateOpen, setModalUpdateOpen] = React.useState(-1);
+  const [modalShowOpen, setModalShowOpen] = React.useState(-1);
   
   const [volunteerData, setVolunteerData] = React.useState(undefined);
   const loadOrgData = async () => {
@@ -60,7 +60,7 @@ const Organizations = ({ sam }) => {
   const handleSubmit = async (event) => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
     event.preventDefault();
-    console.log(event);
+    //console.log(event);
     const postData = {
       Name: event.target[0].value,
       CountryCode: "91",
@@ -236,11 +236,11 @@ const Organizations = ({ sam }) => {
 
 
                         <Button outline
-                          onClick={() => setModalShowOpen(true)}
+                          onClick={() => setModalShowOpen(idx)}
                           color="primary" type="button">
                           Show Details
                         </Button>
-                        <Modal isOpen={modalShowOpen} toggle={() => setModalShowOpen(false)}>
+                        <Modal isOpen={modalShowOpen===idx} toggle={() => setModalShowOpen(-1)}>
                           <div className=" modal-body p-0">
                             <Card className=" bg-secondary shadow border-0">
                               <CardHeader className=" bg-white pb-5">
@@ -317,11 +317,11 @@ const Organizations = ({ sam }) => {
                       <td>
 
                         <Button outline
-                          onClick={() => setModalUpdateOpen(true)}
+                          onClick={() => setModalUpdateOpen(idx)}
                           color="success" type="button">
                           Update Details
                         </Button>
-                        <Modal isOpen={modalUpdateOpen} toggle={() => setModalUpdateOpen(false)}>
+                        <Modal isOpen={modalUpdateOpen === idx} toggle={() => setModalUpdateOpen(-1)}>
                           <div className=" modal-body p-0">
                             <Card className=" bg-secondary shadow border-0">
                               <CardHeader className=" bg-white pb-5">

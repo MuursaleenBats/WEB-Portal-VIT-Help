@@ -32,7 +32,7 @@ import Header from "components/Headers/Header.js";
 
 
 const Organizations = ({sam}) => {
-  const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
+  const [modalDefaultOpen, setModalDefaultOpen] = React.useState(-1);
 
   const [orgData, setOrgData] = React.useState(undefined);
 
@@ -87,13 +87,13 @@ const Organizations = ({sam}) => {
                     <td >{orgdata.volCount}</td>
                     <td>
                     <Button outline
-                    onClick={() => setModalDefaultOpen(true)}
+                    onClick={() => setModalDefaultOpen(idx)}
                     color="primary" type="button">
                             Show Details
                           </Button>
                           <Modal
-                    isOpen={modalDefaultOpen}
-                    toggle={() => setModalDefaultOpen(false)}
+                    isOpen={modalDefaultOpen === idx}
+                    toggle={() => setModalDefaultOpen(-1)}
                     >
                     <div className=" modal-header">
                       <h3 className=" modal-title" id="modal-title-default">

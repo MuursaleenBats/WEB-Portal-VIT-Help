@@ -32,7 +32,7 @@ import Header from "components/Headers/EnterpriseHeader.js";
 
 
 const Organizations = ({sam}) => {
-  const [modalDefaultOpen, setModalDefaultOpen] = React.useState(false);
+  const [modalDefaultOpen, setModalDefaultOpen] = React.useState(-1);
 
   const [caseData, setCaseData] = React.useState(undefined);
   const loadCaseData = async () => {
@@ -80,13 +80,13 @@ const Organizations = ({sam}) => {
                     <td>
 
                     <Button outline
-                    onClick={() => setModalDefaultOpen(true)}
+                    onClick={() => setModalDefaultOpen(idx)}
                     color="danger" type="button">
                             Show Details
                           </Button>
                           <Modal
-                    isOpen={modalDefaultOpen}
-                    toggle={() => setModalDefaultOpen(false)}
+                    isOpen={modalDefaultOpen === idx}
+                    toggle={() => setModalDefaultOpen(-1)}
                     >
                     <div className=" modal-header">
                       <h6 className=" modal-title" id="modal-title-default">
