@@ -71,6 +71,8 @@ const Organizations = ({ sam }) => {
       Lng: "00.000",
       Profession: event.target[4].value,
       serviceRole: "Volunteer",
+      Token: "1",
+      Status: "active",
       EnterpriseId: org.Id
     }
     if(event.target[0].value===""){
