@@ -37,40 +37,35 @@ const Organizations = ({sam}) => {
   const [caseData, setCaseData] = React.useState(undefined);
   const loadCaseData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const caseDataGetResponse = await axios.get("http://65.2.142.67:3001/data/cases",{
-      params: {
-        onlyNotAccepted: true,
-        EnterpriseId: org.Id
-      }
-    });
+    const caseDataGetResponse = await axios.get("http://localhost:3001/data/cases");
     setCaseData(caseDataGetResponse.data);
     //console.log(caseDataGetResponse.data);
   }
   React.useEffect(loadCaseData, []);
 
-  const [volunteerData, setVolunteerData] = React.useState(undefined);
-  const loadOrgData = async () => {
-    var org = JSON.parse(localStorage.getItem("vh-org"));
-    const volunteerDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/orgvolunt/${org.Id}`);
-    setVolunteerData(volunteerDataGetResponse.data);
-    //console.log(volunteerDataGetResponse.data);
-  }
-  React.useEffect(loadOrgData, []);
+  // const [volunteerData, setVolunteerData] = React.useState(undefined);
+  // const loadOrgData = async () => {
+  //   var org = JSON.parse(localStorage.getItem("vh-org"));
+  //   const volunteerDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/orgvolunt/${org.Id}`);
+  //   setVolunteerData(volunteerDataGetResponse.data);
+  //   //console.log(volunteerDataGetResponse.data);
+  // }
+  // React.useEffect(loadOrgData, []);
 
-  const updateCaseStat = async (event, idx) => {
-    event.preventDefault();
-    //console.log(event);
-    const postData = {
-      Status: "Accepted",
-      serviceRole: "Volunteer",
-      CaseId: caseData[idx].Id,
-      UserId: volunteerData[idx].Id
-    }
-    console.log(postData.CaseId);
-    const postResponse = axios.post(`http://65.2.142.67:3001/data/updateCaseStat`, postData);
-    console.log(postResponse.data);
-    await loadCaseData();
-  }
+  // const updateCaseStat = async (event, idx) => {
+  //   event.preventDefault();
+  //   //console.log(event);
+  //   const postData = {
+  //     Status: "Accepted",
+  //     serviceRole: "Volunteer",
+  //     CaseId: caseData[idx].Id,
+  //     UserId: volunteerData[idx].Id
+  //   }
+  //   console.log(postData.CaseId);
+  //   const postResponse = axios.post(`http://65.2.142.67:3001/data/updateCaseStat`, postData);
+  //   console.log(postResponse.data);
+  //   await loadCaseData();
+  // }
 
   return (
     <>
@@ -89,7 +84,6 @@ const Organizations = ({sam}) => {
                   <tr>
                     <th scope="col">Case Id</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Volunteer NAME</th>
                     <th scope="col">Type</th>
                     <th scope="col">Details</th>
                     <th scope="col" />
@@ -97,15 +91,14 @@ const Organizations = ({sam}) => {
                 </thead>
                 <tbody>
                 {caseData && caseData.map((thisCase, idx) => (
-                    volunteerData && volunteerData.map((volunteer, idx) => (
-                    <tr key={thisCase.Id && volunteer.Id}>
+                    // volunteerData && volunteerData.map((volunteer, idx) => (
+                    <tr key={thisCase.Id}>
                       <td >{thisCase.Id}</td>
                       <td >{new Date(thisCase.TimeStamp).toDateString()}</td>
-                      <td >{volunteer.Name}</td>
                       <td >{thisCase.helptype.HelpType}</td>
                       <td>
 
-                    <Button outline
+                      <Button outline
                     onClick={() => setModalDefaultOpen(idx)}
                     color="danger" type="button">
                             Show Details
@@ -113,7 +106,7 @@ const Organizations = ({sam}) => {
                           <Modal
                     isOpen={modalDefaultOpen === idx}
                     toggle={() => setModalDefaultOpen(-1)}
-                    >
+                    > 
                     <div className=" modal-header">
                       <h3 className=" modal-title" id="modal-title-default">
                       Case Details
@@ -134,6 +127,7 @@ const Organizations = ({sam}) => {
                       <p>
                       <b>Name of Distressed:</b> {thisCase.Name}<br/>
                       <b>Phone Number:</b> {thisCase.PhoneNumber}<br/>
+                      <b>Age: </b> {thisCase.Age}<br/>
                       <b>Address:</b> {thisCase.Address}
                       </p>
 
@@ -151,13 +145,13 @@ const Organizations = ({sam}) => {
                     </div>
                     </Modal>
                     </td>
-                    <td>
+                    {/* <td>
                     <Button outline color="success" 
                     onClick={(event) => updateCaseStat(event, idx)}
                     type="submit">
                           Accept Case
                     </Button>
-                    </td>
+                    </td> */}
 
 
 
@@ -165,7 +159,7 @@ const Organizations = ({sam}) => {
 
 
                   </tr>
-                ))))}
+                ))}
                 </tbody>
               </Table>
 

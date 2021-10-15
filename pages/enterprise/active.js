@@ -64,7 +64,7 @@ const Organizations = ({sam}) => {
                   <tr>
                     <th scope="col">Case</th>
                     <th scope="col">Date</th>
-                    <th scope="col">Volunteer NAME</th>
+                    
                     <th scope="col">Type</th>
                     <th scope="col">Details</th>
                     <th scope="col" />
@@ -75,7 +75,7 @@ const Organizations = ({sam}) => {
                   <tr key={thisCase.Id}>
                     <td >{thisCase.Id}</td>
                     <td >{new Date(thisCase.TimeStamp).toDateString()}</td>
-                    <td >{thisCase.statuses[0].user.Name}</td>
+                    
                     <td>{thisCase.helptype.HelpType}</td>
                     <td>
 
@@ -108,6 +108,7 @@ const Organizations = ({sam}) => {
                       <p>
                       <b>Name of Distressed:</b> {thisCase.Name}<br/>
                       <b>Phone Number:</b> {thisCase.PhoneNumber}<br/>
+                      <b>Age: </b> {thisCase.Age}<br/>
                       <b>Address:</b> {thisCase.Address}
                       </p>
 

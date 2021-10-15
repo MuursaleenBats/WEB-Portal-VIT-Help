@@ -60,7 +60,7 @@ const Organizations = ({ sam }) => {
   const handleSubmit = async (event) => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
     event.preventDefault();
-    //console.log(event);
+    console.log(event);
     const postData = {
       Name: event.target[0].value,
       CountryCode: "91",

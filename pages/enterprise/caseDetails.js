@@ -33,19 +33,45 @@ import Header from "components/Headers/EnterpriseHeader.js";
 
 const Organizations = ({sam}) => {
   const [modalDefaultOpen, setModalDefaultOpen] = React.useState(-1);
-
+  
   const [caseData, setCaseData] = React.useState(undefined);
   const loadCaseData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const caseDataGetResponse = await axios.get("http://65.2.142.67:3001/data/closedCases",{
+    const caseDataGetResponse = await axios.get("http://localhost:3001/data/caseDetails",{
       params: {
         onlyAccepted: true,
         EnterpriseId: org.Id
       }
     });
     setCaseData(caseDataGetResponse.data);
+    //console.log(caseDataGetResponse.data);
   }
   React.useEffect(loadCaseData, []);
+
+  // const [volunteerData, setVolunteerData] = React.useState(undefined);
+  // const loadOrgData = async () => {
+  //   var org = JSON.parse(localStorage.getItem("vh-org"));
+  //   const volunteerDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/orgvolunt/${org.Id}`);
+  //   setVolunteerData(volunteerDataGetResponse.data);
+  //   //console.log(volunteerDataGetResponse.data);
+  // }
+  // React.useEffect(loadOrgData, []);
+
+  // const updateCaseStat = async (event, idx) => {
+  //   event.preventDefault();
+  //   //console.log(event);
+  //   const postData = {
+  //     Status: "Accepted",
+  //     serviceRole: "Volunteer",
+  //     CaseId: caseData[idx].Id,
+  //     UserId: volunteerData[idx].Id
+  //   }
+  //   console.log(postData.CaseId);
+  //   const postResponse = axios.post(`http://65.2.142.67:3001/data/updateCaseStat`, postData);
+  //   console.log(postResponse.data);
+  //   await loadCaseData();
+  // }
+
   return (
     <>
       <Header />
@@ -56,35 +82,40 @@ const Organizations = ({sam}) => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">Closed Cases</h3>
+                <h3 className="mb-0">Case Details</h3>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Case</th>
+                    <th scope="col">Case Id</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Volunteer Name</th>
                     <th scope="col">Type</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Details</th>
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
                 {caseData && caseData.map((thisCase, idx) => (
-                  <tr key={thisCase.Id}>
-                    <td >{thisCase.Id}</td>
-                    <td >{new Date(thisCase.TimeStamp).toDateString()}</td>
-                    <td>{thisCase.helptype.HelpType}</td>
-                    <td>
+                    // volunteerData && volunteerData.map((volunteer, idx) => (
+                    <tr key={thisCase.Id}>
+                      <td >{thisCase.Id}</td>
+                      <td >{new Date(thisCase.TimeStamp).toDateString()}</td>
+                      <td >{thisCase.statuses[0].user.Name}</td>
+                      <td >{thisCase.helptype.HelpType}</td>
+                      <td >{thisCase.Status}</td> 
+                      <td>
 
-                    <Button outline
+                      <Button outline
                     onClick={() => setModalDefaultOpen(idx)}
-                    color="success" type="button">
+                    color="danger" type="button">
                             Show Details
                           </Button>
                           <Modal
                     isOpen={modalDefaultOpen === idx}
                     toggle={() => setModalDefaultOpen(-1)}
-                    >
+                    > 
                     <div className=" modal-header">
                       <h3 className=" modal-title" id="modal-title-default">
                       Case Details
@@ -123,7 +154,13 @@ const Organizations = ({sam}) => {
                     </div>
                     </Modal>
                     </td>
-
+                    {/* <td>
+                    <Button outline color="success" 
+                    onClick={(event) => updateCaseStat(event, idx)}
+                    type="submit">
+                          Accept Case
+                    </Button>
+                    </td> */}
 
 
 

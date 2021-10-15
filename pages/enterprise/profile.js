@@ -57,7 +57,7 @@ const Profile = ({sam}) => {
     }
     const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprise/${orgData.NameofOrg}`, postData);
     console.log(postResponse.data);
-    alert("Please login again to see updated details");
+    alert("Please login again to see updated profile");
     await loadOrgData();
   }
 
