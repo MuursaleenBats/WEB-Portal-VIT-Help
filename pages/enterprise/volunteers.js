@@ -63,13 +63,13 @@ const Organizations = ({ sam }) => {
     console.log(event);
     const postData = {
       Name: event.target[0].value,
-      CountryCode: "91",
-      PhoneNumber: event.target[1].value,
-      Age: new Date().getYear() - new Date(event.target[2].value).getYear(),
-      Address: event.target[3].value,
+      CountryCode: event.target[1].value,
+      PhoneNumber: event.target[2].value,
+      Age: new Date().getYear() - new Date(event.target[3].value).getYear(),
+      Address: event.target[4].value,
       Lat: "00.000",
       Lng: "00.000",
-      Profession: event.target[4].value,
+      Profession: event.target[5].value,
       serviceRole: "Volunteer",
       Token: "1",
       Status: "active",
@@ -164,6 +164,9 @@ const Organizations = ({ sam }) => {
                                   <i className=" ni ni-mobile-button"></i>
                                 </InputGroupText>
                               </InputGroupAddon>
+			
+                              <Input  placeholder="+1" name="CountryCode" type="text" ></Input>
+				
                               <Input placeholder="Phone Number" type="tel"></Input>
                             </InputGroup>
                           </FormGroup>

@@ -11,18 +11,6 @@ var routes = [
     icon: "ni ni-single-02 text-black",
     layout: "/enterprise",
   },
-  /*{
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
-    layout: "/enterprise",
-  },
-  {
-    path: "/maps",
-    name: "Maps",
-    icon: "ni ni-pin-3 text-orange",
-    layout: "/enterprise",
-  },*/
   {
     path: "/volunteers",
     name: "No Of Volunteers",
@@ -43,8 +31,14 @@ var routes = [
   },
   {
     path: "/closed",
-    name: "Cloased Cases",
+    name: "Closed Cases",
     icon: "ni ni-check-bold text-green",
+    layout: "/enterprise",
+  },
+  {
+    path: "/caseDetails",
+    name: "Case Details",
+    icon: "fas fa-signal",
     layout: "/enterprise",
   },
 /*  {
