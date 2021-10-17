@@ -32,16 +32,19 @@ function Login() {
 
   const handleSubmit = async (event) =>{
     event.preventDefault();
+    console.log(event);
       const postData = {
         Email: event.target[0].value,
         password: event.target[1].value
     }
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprise/${postData.Email}`);
-    if(getResponse.data === null){
-      alert("Please enter valid email id")
+    
+    if(event.target[0].value==""){
+      alert("Please enter data in all fields")
     }else{
-     if(getResponse.data === undefined){
-      alert("Enterprise does not exist. Please register ");
+     const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprise/${postData.Email}`);
+     console.log(getResponse)
+     if(getResponse.data === null){
+      alert("Enterprise does not exist or has been removed by the administrator");
      }
      else{
       if(getResponse.data.password != postData.password){
@@ -49,7 +52,9 @@ function Login() {
        }
       else{
         // alert("good");
-        
+        if(getResponse.data.Status === null){
+          alert("Waiting for approval from administrator");
+        }else{
         localStorage.setItem("vh-org", JSON.stringify(getResponse.data));
 
         // var org = JSON.parse(localStorage.getItem("vh-org"));
@@ -59,6 +64,7 @@ function Login() {
 
         window.location.href="/enterprise/dashboard";
       }
+     }
     }
    }
   }
