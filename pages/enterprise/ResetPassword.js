@@ -25,8 +25,12 @@ function ResetPassword() {
       const postData = {
         phoneNumber : event.target[0].value
     }
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.phoneNumber}`);
     //console.log(getResponse.data);
+    if(event.target[0].value===""){
+      alert("Please enter phone number");
+    }
+    else{
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.phoneNumber}`);
     if(getResponse.data.length === 0){
 
       alert("Please enter valid phone number");
@@ -46,6 +50,7 @@ function ResetPassword() {
      else{
        alert("Please enter password");
      }
+    }
    }
   }
 

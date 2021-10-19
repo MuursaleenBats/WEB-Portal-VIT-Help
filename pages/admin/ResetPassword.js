@@ -24,17 +24,23 @@ function ResetPassword() {
       const postData = {
         mobile_no : event.target[0].value
     }
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/adminPhone/${postData.mobile_no}`);
     //console.log(getResponse.data);
+    if(event.target[0].value===""){
+      alert("Please enter phone number");
+    }
+    else{
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.mobile_no}`);
     if(getResponse.data.length === 0){
+
       alert("Please enter valid phone number");
+
     }
     else{
      if(event.target[1].value !="" && event.target[2].value != ""){
       if(event.target[1].value===event.target[2].value){
         localStorage.setItem("vh-pass", event.target[2].value);
-        localStorage.setItem("vh-admin", JSON.stringify(getResponse.data));
-        window.location.href="/admin/varify";
+        localStorage.setItem("vh-vol", JSON.stringify(getResponse.data));
+        window.location.href="/enterprise/varify";
       }
       else{
         alert("Please make sure you have entered correct password second time");
@@ -43,8 +49,10 @@ function ResetPassword() {
      else{
        alert("Please enter password");
      }
+    }
    }
   }
+
   return (
     <>
       <Col lg="5" md="7">
