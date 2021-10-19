@@ -17,12 +17,12 @@ var routes = [
     icon: "ni ni-single-02 text-yellow",
     layout: "/enterprise",
   },
-  {
-    path: "/notification",
-    name: "Notifications",
-    icon: "ni ni-bell-55 text-gray",
-    layout: "/enterprise",
-  },
+  // {
+  //   path: "/notification",
+  //   name: "Notifications",
+  //   icon: "ni ni-bell-55 text-gray",
+  //   layout: "/enterprise",
+  // },
   {
     path: "/active",
     name: "Active Cases",
