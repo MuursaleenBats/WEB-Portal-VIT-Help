@@ -71,7 +71,6 @@ const Organizations = ({ sam }) => {
       Lng: "00.000",
       Profession: event.target[5].value,
       serviceRole: "Volunteer",
-      Token: "1",
       Status: "Active",
       EnterpriseId: org.Id
     }
