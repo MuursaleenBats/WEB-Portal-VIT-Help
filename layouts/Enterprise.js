@@ -5,7 +5,7 @@ import { Container } from "reactstrap";
 // core components
 import EnterpriseNavbar from "components/Navbars/EnterpriseNavbar.js";
 import EnterpriseFooter from "components/Footers/EnterpriseFooter.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import Sidebar from "components/Sidebar/SidebarEnterprise.js";
 
 import routes from "enterprise.js";
 

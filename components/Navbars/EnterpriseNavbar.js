@@ -51,21 +51,7 @@ function EnterpriseNavbar({ brandText }) {
             </FormGroup>
           </Form>
           <Nav className="align-items-center d-none d-md-flex" navbar>
-          <UncontrolledDropdown nav>
-            <DropdownToggle nav className="nav-link-icon">
-              <i className="ni ni-bell-55" />
-            </DropdownToggle>
-            <DropdownMenu
-              aria-labelledby="navbar-default_dropdown_1"
-              className="dropdown-menu-arrow"
-              right
-            >
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem href="./notification">See All</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+  
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">

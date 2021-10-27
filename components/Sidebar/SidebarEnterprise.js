@@ -41,8 +41,14 @@ var ps;
 function Sidebar(props) {
   // used for checking current route
   const router = useRouter();
-  
-  
+  const logout = (e) => {
+    e.preventDefault();
+    window.localStorage.clear();
+    // window.localStorage.removeItem("vh-org");
+    router.push("/enterprise/login");
+  };
+
+
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
@@ -109,21 +115,7 @@ function Sidebar(props) {
         ) : null}
         {/* User */}
         <Nav className="align-items-center d-md-none">
-          <UncontrolledDropdown nav>
-            <DropdownToggle nav className="nav-link-icon">
-              <i className="ni ni-bell-55" />
-            </DropdownToggle>
-            <DropdownMenu
-              aria-labelledby="navbar-default_dropdown_1"
-              className="dropdown-menu-arrow"
-              right
-            >
-              <DropdownItem>Action</DropdownItem>
-              <DropdownItem>Another action</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem href="./notification">See All</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
+
           <UncontrolledDropdown nav>
             <DropdownToggle nav>
               <Media className="align-items-center">
@@ -136,12 +128,15 @@ function Sidebar(props) {
               </Media>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
+            <DropdownItem href="./profile" >
+              <i className="ni ni-single-02 text-grey" />
+              <span>View Profile</span>
+            </DropdownItem>
 
-
-              <DropdownItem href="#pablo" onClick={(e)=>e.preventDefault()}>
-                <i className="ni ni-user-run" />
-                <span>Logout</span>
-              </DropdownItem>
+            <DropdownItem href="#pablo" onClick={logout}>
+              <i className="ni ni-user-run" />
+              <span>Logout</span>
+            </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
