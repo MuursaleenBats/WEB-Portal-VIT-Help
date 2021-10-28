@@ -89,7 +89,7 @@ const updateAdmin = async (event, idx) => {
   console.log(event);
   const postData = {
     ...(event.target[1].value) && {Name: event.target[1].value},
-    ...(event.target[2].value) && {phoneNumber: event.target[2].value},
+    ...(event.target[2].value) && {mobile_no: event.target[2].value},
     ...(event.target[3].value) && {Email: event.target[3].value},
     ...(event.target[4].value) && {Address: event.target[4].value},    
   }

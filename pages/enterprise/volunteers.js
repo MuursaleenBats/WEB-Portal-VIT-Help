@@ -99,15 +99,14 @@ const Organizations = ({ sam }) => {
     //console.log(event);
     const postData = {
       ...(event.target[0].value) && {Name: event.target[0].value},
-      ...(event.target[1].value) && {phoneNumber: event.target[1].value},
-      ...(new Date().getYear() - new Date(event.target[2].value).getYear())
-       && {Age: new Date().getYear() - new Date(event.target[2].value).getYear()},
-      ...(event.target[3].value) && {Address: event.target[3].value},
+      ...(event.target[1].value) && {PhoneNumber: event.target[1].value},
+      ...(event.target[2].value) && {Age: event.target[2].value},
+      ...(event.target[3].value) && {Address: event.target[3].value},    
     }
     const postResponse = await axios.patch(`http://65.2.142.67:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
-    console.log(postResponse.data);
     await loadOrgData();
   }
+  //const postResponse = await axios.patch(`http://65.2.142.67:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
   
   const deleteVolunteerByIndex = async (event, index) => {
     event.preventDefault();
