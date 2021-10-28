@@ -32,16 +32,17 @@ function Login() {
 
   const handleSubmit = async (event) =>{
     event.preventDefault();
-    const postData = {
+    console.log(event);
+      const postData = {
         Email: event.target[0].value,
         password: event.target[1].value
     }
-    
+
     if(event.target[0].value==""){
       alert("Please enter data in all fields")
     }else{
      const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprise/${postData.Email}`);
-     
+     console.log(getResponse)
      if(getResponse.data === null){
       alert("Enterprise does not exist or has been removed by the administrator");
      }
@@ -117,7 +118,17 @@ function Login() {
               >
                 <small>Forgot password?</small>
               </a>
+
+              <a
+                className="text-black"
+                style={{float : 'right', paddingRight : '5px'}}
+                href="/enterprise/register"
+                //  onClick={(e) => e.preventDefault()}  // NEED TO ASSIGN APPROPRIATE FUNCTION
+              >
+                <small>Click To Register</small>
+              </a>
               </div>
+
               <div className="text-center">
                 <Button
                 //href="/enterprise/dashboard"

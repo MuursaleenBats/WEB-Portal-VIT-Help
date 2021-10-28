@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 // reactstrap components
 import {
@@ -18,43 +18,51 @@ import {
 // layout for this page
 import Auth from "layouts/Auth.js";
 import axios from "axios";
-function ResetPassword() {
+
+import {useRouter} from "next/router";
+
+function Login() {
+
+  const router = useRouter();
+  useEffect(() => {
+    if(window.localStorage.getItem("vh-org")) {
+      router.push("/enterprise/dashboard");
+    }
+  });
 
   const handleSubmit = async (event) =>{
     event.preventDefault();
-      const postData = {
-        phoneNumber : event.target[0].value
+    const postData = {
+        Email: event.target[0].value,
+        password: event.target[1].value
     }
-    //console.log(getResponse.data);
-    if(event.target[0].value===""){ 
-      alert("Please enter phone number");
-    }
-    else{
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.phoneNumber}`);
     
-    if(getResponse.data.length === 0){
-
-      alert("Please enter valid phone number");
-
-    }
-    else{
-     if(event.target[1].value !="" && event.target[2].value != ""){
-      if(event.target[1].value===event.target[2].value){
-        localStorage.setItem("vh-password", event.target[2].value);
-        localStorage.setItem("vh-orgOtp", JSON.stringify(getResponse.data));
-        const otpSend = await axios.get("http://65.2.142.67:3001/otp/send",{
-          params: {
-            phoneNumber: postData.phoneNumber,
-          }
-        });
-        window.location.href="/enterprise/varify";
-      }
-      else{
-        alert("Please make sure you have entered correct password second time");
-      }
+    if(event.target[0].value==""){
+      alert("Please enter data in all fields")
+    }else{
+     const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprise/${postData.Email}`);
+     
+     if(getResponse.data === null){
+      alert("Enterprise does not exist or has been removed by the administrator");
      }
      else{
-       alert("Please enter password");
+      if(getResponse.data.password != postData.password){
+          alert("Invalid Credentials");
+       }
+      else{
+        // alert("good");
+        if(getResponse.data.Status === null){
+          alert("Waiting for approval from administrator");
+        }else{
+        localStorage.setItem("vh-org", JSON.stringify(getResponse.data));
+
+        // var org = JSON.parse(localStorage.getItem("vh-org"));
+        // org.Name
+
+        // localStorage.removeItem("vh-org");
+
+        window.location.href="/enterprise/dashboard";
+      }
      }
     }
    }
@@ -66,7 +74,7 @@ function ResetPassword() {
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
           <div className="text-center">
-          <h1 className="text-black">Reset Password</h1>
+          <h1 className="text-black">Enterprise</h1>
           </div>
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-5">
@@ -76,13 +84,13 @@ function ResetPassword() {
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="ni ni-mobile-button" />
+                      <i className="ni ni-email-83"/>
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="Phone Number"
-                    type="tel"
-
+                    placeholder="Email"
+                    type="email"
+                    autoComplete="new-email"
                   />
                 </InputGroup>
               </FormGroup>
@@ -100,26 +108,21 @@ function ResetPassword() {
                   />
                 </InputGroup>
               </FormGroup>
-              <FormGroup>
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="ni ni-lock-circle-open" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input
-                    placeholder="Confirm Password"
-                    type="password"
-                    autoComplete="new-password"
-                  />
-                </InputGroup>
-              </FormGroup>
+              <div >
 
+              <a
+                className="text-black"
+                href="/enterprise/ResetPassword"
+                //  onClick={(e) => e.preventDefault()}  // NEED TO ASSIGN APPROPRIATE FUNCTION
+              >
+                <small>Forgot password?</small>
+              </a>
+              </div>
               <div className="text-center">
                 <Button
-                //href="/enterprise/varify"
+                //href="/enterprise/dashboard"
                 className="my-4" color="primary" type="submit">
-                  Change Password
+                  Sign in
                 </Button>
               </div>
             </Form>
@@ -138,6 +141,6 @@ function ResetPassword() {
   );
 }
 
-ResetPassword.layout = Auth;
+Login.layout = Auth;
 
-export default ResetPassword;
+export default Login;

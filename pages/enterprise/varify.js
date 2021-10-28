@@ -27,7 +27,7 @@ function varify() {
     //console.log(event);
     
     const postData = {
-      pass: passwd
+      password: passwd
     }
     const varifyOtp = await axios.get("http://65.2.142.67:3001/otp/verify",{
       params: {
@@ -39,7 +39,6 @@ function varify() {
     const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprisephnNo/${org[0].phoneNumber}`,postData);
     alert("Password Updated");
     window.location.href="/enterprise/login";
-    //await loadOrgData();
     }
     else{
       alert("Invalid Otp");
