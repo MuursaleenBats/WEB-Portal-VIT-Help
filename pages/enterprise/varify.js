@@ -22,7 +22,7 @@ function varify() {
 
   const updateOrg = async (event) => {
     event.preventDefault();
-    var passwd = localStorage.getItem("vh-pass");
+    var passwd = localStorage.getItem("vh-password");
     var org = JSON.parse(localStorage.getItem("vh-orgOtp"));
     //console.log(event);
     
