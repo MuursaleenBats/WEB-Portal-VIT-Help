@@ -29,7 +29,8 @@ function ResetPassword() {
       alert("Please enter phone number");
     }
     else{
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.mobile_no}`);
+    const getResponse = await axios.get(`http://65.2.142.67:3001/data/adminPhone/${postData.mobile_no}`);
+    
     if(getResponse.data.length === 0){
 
       alert("Please enter valid phone number");
@@ -39,8 +40,13 @@ function ResetPassword() {
      if(event.target[1].value !="" && event.target[2].value != ""){
       if(event.target[1].value===event.target[2].value){
         localStorage.setItem("vh-pass", event.target[2].value);
-        localStorage.setItem("vh-vol", JSON.stringify(getResponse.data));
-        window.location.href="/enterprise/varify";
+        localStorage.setItem("vh-adminOtp", JSON.stringify(getResponse.data));
+        const otpSend = await axios.get("http://65.2.142.67:3001/otp/send",{
+          params: {
+            phoneNumber: postData.mobile_no,
+          }
+        });
+        window.location.href="/admin/varify";
       }
       else{
         alert("Please make sure you have entered correct password second time");

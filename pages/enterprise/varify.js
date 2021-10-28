@@ -22,20 +22,39 @@ function varify() {
 
   const updateOrg = async (event) => {
     event.preventDefault();
-    var pass = localStorage.getItem("vh-pass");
-    var vol = JSON.parse(localStorage.getItem("vh-vol"));
+    var passwd = localStorage.getItem("vh-pass");
+    var org = JSON.parse(localStorage.getItem("vh-orgOtp"));
     //console.log(event);
-    console.log(pass);
-    console.log(vol);
+    
     const postData = {
-      password: pass
+      pass: passwd
     }
-    const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprisephnNo/${vol[0].phoneNumber}`,postData);
-    console.log(postResponse.data);
+    const varifyOtp = await axios.get("http://65.2.142.67:3001/otp/verify",{
+      params: {
+        phoneNumber: org[0].phoneNumber,
+        otp: event.target[0].value
+      }
+    });
+    if(varifyOtp.data.type == "success"){
+    const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprisephnNo/${org[0].phoneNumber}`,postData);
     alert("Password Updated");
     window.location.href="/enterprise/login";
     //await loadOrgData();
+    }
+    else{
+      alert("Invalid Otp");
+    }
   }
+
+  const resendOtp = async (event) =>{
+    event.preventDefault();
+    var org = JSON.parse(localStorage.getItem("vh-orgOtp"));
+    const resendOTP = await axios.get("http://65.2.142.67:3001/otp/resend",{
+      params: {
+        phoneNumber: org[0].phoneNumber
+      }
+    });
+  }    
 
   return (
     <>
@@ -65,6 +84,12 @@ function varify() {
               </FormGroup>
 
               <div className="text-center">
+              <Button
+                //href="/enterprise/dashboard"
+                className="my-4" color="primary" onClick={resendOtp}
+                type="submit">
+                  Resend Otp
+                </Button>
                 <Button
                 //href="/enterprise/dashboard"
                 className="my-4" color="primary" 

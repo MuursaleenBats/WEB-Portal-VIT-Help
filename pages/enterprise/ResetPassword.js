@@ -26,11 +26,12 @@ function ResetPassword() {
         phoneNumber : event.target[0].value
     }
     //console.log(getResponse.data);
-    if(event.target[0].value===""){
+    if(event.target[0].value===""){ 
       alert("Please enter phone number");
     }
     else{
     const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.phoneNumber}`);
+    
     if(getResponse.data.length === 0){
 
       alert("Please enter valid phone number");
@@ -40,7 +41,12 @@ function ResetPassword() {
      if(event.target[1].value !="" && event.target[2].value != ""){
       if(event.target[1].value===event.target[2].value){
         localStorage.setItem("vh-pass", event.target[2].value);
-        localStorage.setItem("vh-vol", JSON.stringify(getResponse.data));
+        localStorage.setItem("vh-orgOtp", JSON.stringify(getResponse.data));
+        const otpSend = await axios.get("http://65.2.142.67:3001/otp/send",{
+          params: {
+            phoneNumber: postData.phoneNumber,
+          }
+        });
         window.location.href="/enterprise/varify";
       }
       else{

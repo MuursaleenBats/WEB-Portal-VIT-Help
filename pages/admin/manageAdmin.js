@@ -79,7 +79,7 @@ const Admins = ({sam}) => {
         alert("Please enter data in all fields")
    }else{
        const postResponse = await axios.post("http://65.2.142.67:3001/data/admin", postData);
-       console.log(postResponse.data);
+       
        await loadAdminData();
      }
   }
