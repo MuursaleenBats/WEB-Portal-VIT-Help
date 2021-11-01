@@ -217,7 +217,7 @@ const deleteAdminByIndex = async (event, index) => {
                     <td >{admindata.Id}</td>
                     <td >{admindata.Name}</td>
                     <td >{admindata.mobile_no}</td>
-                    <td >{admindata.Address}</td>
+                    <td >{admindata.Email}</td>
                     <td>
 
 
