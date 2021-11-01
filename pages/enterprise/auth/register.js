@@ -22,8 +22,8 @@ function Register() {
   return (
     <>
       <Col lg="6" md="8">
-        <Card className="bg-secondary shadow border-0">
-          <CardHeader className="bg-transparent pb-5">
+        <Card className="bg-secondary shadow border-0" >
+          <CardHeader className="bg-transparent pb-5" >
 
 
             <Form role="form">
@@ -99,7 +99,7 @@ function Register() {
                 </Button>
               </div>
             </Form>
-          </CardBody>
+          </CardHeader>
         </Card>
       </Col>
     </>
