@@ -207,7 +207,7 @@ const deleteAdminByIndex = async (event, index) => {
                     <th scope="col">Name</th>
                     <th scope="col">Mobile Number</th>
                     <th scope="col">Email ID</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Details</th>
                     <th scope="col">Control</th>
                   </tr>
                 </thead>

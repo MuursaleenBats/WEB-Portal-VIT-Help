@@ -106,7 +106,20 @@ const Organizations = ({sam}) => {
                       <b>Name of Distressed:</b> {thisCase.Name}<br/>
                       <b>Phone Number:</b> {thisCase.PhoneNumber}<br/>
                       <b>Age: </b> {thisCase.Age}<br/>
-                      <b>Address:</b> {thisCase.Address}
+                      <b>Address:</b> {thisCase.Address}<br/>
+                      <h3>Other:</h3>
+                      <table>
+                        <tr>
+                          <th>Username</th>
+                          <th>Status</th>
+                          <th>Time</th>
+                        </tr>
+                        {thisCase.statuses.map(status => <tr>
+                          <td>{status.user.Name} ({status.serviceRole})</td>
+                          <td>{status.Status}</td>
+                          <td>{status.time}</td>
+                        </tr>)}
+                      </table>
                       </p>
 
                     </div>
