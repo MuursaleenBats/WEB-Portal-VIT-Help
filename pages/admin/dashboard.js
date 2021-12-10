@@ -40,7 +40,7 @@ const Dashboard = (props) => {
   const [graphData, setGraphData] = React.useState(undefined);
   const loadGraphData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const graphDDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/totalCasesByMonth`,{
+    const graphDDataGetResponse = await axios.get(`http://35.154.87.215:3001/data/totalCasesByMonth`,{
       params:{
         onlyAccepted: true
       }
@@ -52,7 +52,7 @@ const Dashboard = (props) => {
   const [barData, setBarData] = React.useState(undefined);
   const loadBarData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const barDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/solvedCasesByMonth`,{
+    const barDataGetResponse = await axios.get(`http://35.154.87.215:3001/data/solvedCasesByMonth`,{
       params:{
         onlyAccepted: true
       }

@@ -55,7 +55,7 @@ const Profile = ({sam}) => {
       //...(event.target[1].value) && {phoneNumber: event.target[1].value},
       ...(event.target[2].value) && {Email: event.target[2].value},
     }
-    const postResponse = await axios.patch(`http://65.2.142.67:3001/data/enterprise/${orgData.NameofOrg}`, postData);
+    const postResponse = await axios.patch(`http://35.154.87.215:3001/data/enterprise/${orgData.NameofOrg}`, postData);
     console.log(postResponse.data);
     alert("Please login again to see updated profile");
     await loadOrgData();

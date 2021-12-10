@@ -30,7 +30,7 @@ function ResetPassword() {
       alert("Please enter phone number");
     }
     else{
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/enterprisePhone/${postData.phoneNumber}`);
+    const getResponse = await axios.get(`http://35.154.87.215:3001/data/enterprisePhone/${postData.phoneNumber}`);
     
     if(getResponse.data.length === 0){
 
@@ -42,7 +42,7 @@ function ResetPassword() {
       if(event.target[1].value===event.target[2].value){
         localStorage.setItem("vh-password", event.target[2].value);
         localStorage.setItem("vh-orgOtp", JSON.stringify(getResponse.data));
-        const otpSend = await axios.get("http://65.2.142.67:3001/otp/send",{
+        const otpSend = await axios.get("http://35.154.87.215:3001/otp/send",{
           params: {
             phoneNumber: postData.phoneNumber,
           }

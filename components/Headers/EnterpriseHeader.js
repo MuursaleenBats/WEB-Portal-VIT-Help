@@ -9,7 +9,7 @@ function EnterpriseHeader() {
 
   React.useEffect(async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const voluntCountDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/orgVoluntCount/${org.Id}`);
+    const voluntCountDataGetResponse = await axios.get(`http://35.154.87.215:3001/data/orgVoluntCount/${org.Id}`);
     setorgVoluntCountData(voluntCountDataGetResponse.data);
     //console.log(voluntCountDataGetResponse.data);
   }, []);
@@ -18,7 +18,7 @@ function EnterpriseHeader() {
 
   React.useEffect(async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const closedCaseCountData = await axios.get("http://65.2.142.67:3001/data/closedCasesCount",{
+    const closedCaseCountData = await axios.get("http://35.154.87.215:3001/data/closedCasesCount",{
       params: {
         onlyAccepted: true,
         EnterpriseId: org.Id
@@ -32,7 +32,7 @@ function EnterpriseHeader() {
 
    React.useEffect(async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const activeCaseCountData = await axios.get("http://65.2.142.67:3001/data/activeCasesCount",{
+    const activeCaseCountData = await axios.get("http://35.154.87.215:3001/data/activeCasesCount",{
       params: {
         onlyAccepted: true,
         EnterpriseId: org.Id
@@ -46,7 +46,7 @@ function EnterpriseHeader() {
 
   React.useEffect(async () => {
    var org = JSON.parse(localStorage.getItem("vh-org"));
-   const totalCaseCountData = await axios.get("http://65.2.142.67:3001/data/orgTotalCasesCount",{
+   const totalCaseCountData = await axios.get("http://35.154.87.215:3001/data/orgTotalCasesCount",{
      params: {
        onlyAccepted: true,
        EnterpriseId: org.Id

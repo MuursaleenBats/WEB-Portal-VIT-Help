@@ -37,7 +37,7 @@ const Organizations = ({sam}) => {
   const [orgData, setOrgData] = React.useState(undefined);
 
   const loadOrgData = async () => {
-    const orgDataGetResponse = await axios.get("http://65.2.142.67:3001/data/orgDataStatus", {
+    const orgDataGetResponse = await axios.get("http://35.154.87.215:3001/data/orgDataStatus", {
       params: {
         includeVolCount: true,
       }
@@ -49,7 +49,7 @@ const Organizations = ({sam}) => {
 
   const deleteOrgByIndex = async (event, index) =>{
     event.preventDefault();
-    const postResponse = await axios.delete(`http://65.2.142.67:3001/data/deleteOrg/${orgData[index].Id}`);
+    const postResponse = await axios.delete(`http://35.154.87.215:3001/data/deleteOrg/${orgData[index].Id}`);
     // console.log(postResponse.data);
     await loadOrgData();
   }

@@ -39,7 +39,7 @@ function Login() {
     if(event.target[0].value===""){
       alert("Please enter data in all fields")
     }else{
-    const getResponse = await axios.get(`http://65.2.142.67:3001/data/admin/${postData.phoneNumber}`);
+    const getResponse = await axios.get(`http://35.154.87.215:3001/data/admin/${postData.phoneNumber}`);
       if(getResponse.data[0] === undefined){
         alert("Admin Phone Number is not valid ");
       }

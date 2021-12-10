@@ -37,7 +37,7 @@ const Organizations = ({sam}) => {
   const [caseData, setCaseData] = React.useState(undefined);
   const loadCaseData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const caseDataGetResponse = await axios.get("http://65.2.142.67:3001/data/caseDetails",{
+    const caseDataGetResponse = await axios.get("http://35.154.87.215:3001/data/caseDetails",{
       params: {
         onlyAccepted: true,
         EnterpriseId: org.Id
@@ -51,7 +51,7 @@ const Organizations = ({sam}) => {
   // const [volunteerData, setVolunteerData] = React.useState(undefined);
   // const loadOrgData = async () => {
   //   var org = JSON.parse(localStorage.getItem("vh-org"));
-  //   const volunteerDataGetResponse = await axios.get(`http://65.2.142.67:3001/data/orgvolunt/${org.Id}`);
+  //   const volunteerDataGetResponse = await axios.get(`http://35.154.87.215:3001/data/orgvolunt/${org.Id}`);
   //   setVolunteerData(volunteerDataGetResponse.data);
   //   //console.log(volunteerDataGetResponse.data);
   // }
@@ -67,7 +67,7 @@ const Organizations = ({sam}) => {
   //     UserId: volunteerData[idx].Id
   //   }
   //   console.log(postData.CaseId);
-  //   const postResponse = axios.post(`http://65.2.142.67:3001/data/updateCaseStat`, postData);
+  //   const postResponse = axios.post(`http://35.154.87.215:3001/data/updateCaseStat`, postData);
   //   console.log(postResponse.data);
   //   await loadCaseData();
   // }
