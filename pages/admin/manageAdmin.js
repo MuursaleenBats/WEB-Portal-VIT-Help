@@ -48,7 +48,7 @@ const Admins = ({sam}) => {
  const [adminData, setAdminData] = React.useState(undefined);
  
  const loadAdminData = async () => {
-   const adminDataGetResponse = await axios.get("http://35.154.87.215:3001/data/adminData");
+   const adminDataGetResponse = await axios.get("http://3.6.32.110:3001/data/adminData");
    setAdminData(adminDataGetResponse.data);
   }
   
@@ -78,7 +78,7 @@ const Admins = ({sam}) => {
    {
         alert("Please enter data in all fields")
    }else{
-       const postResponse = await axios.post("http://35.154.87.215:3001/data/admin", postData);
+       const postResponse = await axios.post("http://3.6.32.110:3001/data/admin", postData);
        
        await loadAdminData();
      }
@@ -93,14 +93,14 @@ const updateAdmin = async (event, idx) => {
     ...(event.target[3].value) && {Email: event.target[3].value},
     ...(event.target[4].value) && {Address: event.target[4].value},    
   }
-  const postResponse = await axios.patch(`http://35.154.87.215:3001/data/updateAdmin/${adminData[idx].Id}`, postData);
+  const postResponse = await axios.patch(`http://3.6.32.110:3001/data/updateAdmin/${adminData[idx].Id}`, postData);
   console.log(postResponse.data);
   await loadAdminData();
 }
 
 const deleteAdminByIndex = async (event, index) => {
   event.preventDefault();
-  const postResponse = await axios.delete(`http://35.154.87.215:3001/data/deleteAdmin/${adminData[index].Id}`);
+  const postResponse = await axios.delete(`http://3.6.32.110:3001/data/deleteAdmin/${adminData[index].Id}`);
   // console.log(postResponse.data);
   await loadAdminData();
 }

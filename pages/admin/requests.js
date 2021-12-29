@@ -42,7 +42,7 @@ const [countryCode, setCountryCode] = useState("");
 
 const [orgData, setOrgData] = React.useState(undefined);
 const loadOrgData = async () => {
-  const orgDataGetResponse = await axios.get("http://35.154.87.215:3001/data/orgData");
+  const orgDataGetResponse = await axios.get("http://3.6.32.110:3001/data/orgData");
   setOrgData(orgDataGetResponse.data);
 }
 
@@ -54,14 +54,14 @@ const updateStatus = async (event, idx) => {
   const postData = {
     Status: "True"
   }
-  const postResponse = await axios.patch(`http://35.154.87.215:3001/data/updateOrgStatus/${orgData[idx].Id}`, postData);
+  const postResponse = await axios.patch(`http://3.6.32.110:3001/data/updateOrgStatus/${orgData[idx].Id}`, postData);
   console.log(postResponse.data);
   await loadOrgData();
 }
 
 const deleteOrgByIndex = async (event, index) =>{
   event.preventDefault();
-  const postResponse = await axios.delete(`http://35.154.87.215:3001/data/deleteOrg/${orgData[index].Id}`);
+  const postResponse = await axios.delete(`http://3.6.32.110:3001/data/deleteOrg/${orgData[index].Id}`);
   // console.log(postResponse.data);
   await loadOrgData();
 }

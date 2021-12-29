@@ -28,14 +28,14 @@ function varify() {
     const postData = {
       pass: passwd
     }
-    const varifyOtp = await axios.get("http://35.154.87.215:3001/otp/verify",{
+    const varifyOtp = await axios.get("http://3.6.32.110:3001/otp/verify",{
       params: {
         phoneNumber: admin[0].mobile_no,
         otp: event.target[0].value
       }
     });
     if(varifyOtp.data.type == "success"){
-    const postResponse = await axios.patch(`http://35.154.87.215:3001/data/adminphnNo/${admin[0].mobile_no}`,postData);
+    const postResponse = await axios.patch(`http://3.6.32.110:3001/data/adminphnNo/${admin[0].mobile_no}`,postData);
     alert("Password Updated");
     window.location.href="/admin/login";
     //await loadOrgData();
@@ -48,7 +48,7 @@ function varify() {
   const resendOtp = async (event) =>{
     event.preventDefault();
     var admin = JSON.parse(localStorage.getItem("vh-adminOtp"));
-    const resendOTP = await axios.get("http://35.154.87.215:3001/otp/resend",{
+    const resendOTP = await axios.get("http://3.6.32.110:3001/otp/resend",{
       params: {
         phoneNumber: admin[0].mobile_no
       }

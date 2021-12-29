@@ -48,7 +48,7 @@ const Organizations = ({ sam }) => {
   const [volunteerData, setVolunteerData] = React.useState(undefined);
   const loadOrgData = async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const volunteerDataGetResponse = await axios.get(`http://35.154.87.215:3001/data/orgvolunt/${org.Id}`,{
+    const volunteerDataGetResponse = await axios.get(`http://3.6.32.110:3001/data/orgvolunt/${org.Id}`,{
       params:{
         includeCaseCount: true
       }
@@ -88,7 +88,7 @@ const Organizations = ({ sam }) => {
     {
          alert("Please enter data in all fields")
     }else{
-    const postResponse = await axios.post("http://35.154.87.215:3001/data/enterprise/orgvolunt", postData);
+    const postResponse = await axios.post("http://3.6.32.110:3001/data/enterprise/orgvolunt", postData);
     console.log(postResponse.data);
     await loadOrgData();
     }
@@ -103,14 +103,14 @@ const Organizations = ({ sam }) => {
       ...(event.target[2].value) && {Age: event.target[2].value},
       ...(event.target[3].value) && {Address: event.target[3].value},    
     }
-    const postResponse = await axios.patch(`http://35.154.87.215:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
+    const postResponse = await axios.patch(`http://3.6.32.110:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
     await loadOrgData();
   }
-  //const postResponse = await axios.patch(`http://35.154.87.215:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
+  //const postResponse = await axios.patch(`http://3.6.32.110:3001/data/updateVolunt/${volunteerData[idx].Id}`, postData);
   
   const deleteVolunteerByIndex = async (event, index) => {
     event.preventDefault();
-    const postResponse = await axios.delete(`http://35.154.87.215:3001/data/deleteVolunt/${volunteerData[index].Id}`);
+    const postResponse = await axios.delete(`http://3.6.32.110:3001/data/deleteVolunt/${volunteerData[index].Id}`);
     // console.log(postResponse.data);
     await loadOrgData();
   }

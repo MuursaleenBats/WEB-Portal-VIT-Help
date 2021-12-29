@@ -7,7 +7,7 @@ function Header() {
   const [countData, setCountData] = React.useState(undefined);
 
   React.useEffect(async () => {
-    const countDataGetResponse = await axios.get("http://35.154.87.215:3001/data/orgCount");
+    const countDataGetResponse = await axios.get("http://3.6.32.110:3001/data/orgCount");
     setCountData(countDataGetResponse.data);
     //console.log(countDataGetResponse.data);
   }, []);
@@ -15,7 +15,7 @@ function Header() {
   const [voluntcountData, setvoluntCountData] = React.useState(undefined);
 
   React.useEffect(async () => {
-    const voluntCountDataGetResponse = await axios.get("http://35.154.87.215:3001/data/voluntCount");
+    const voluntCountDataGetResponse = await axios.get("http://3.6.32.110:3001/data/voluntCount");
     setvoluntCountData(voluntCountDataGetResponse.data);
     //console.log(voluntCountDataGetResponse.data);
   }, []);
@@ -24,7 +24,7 @@ function Header() {
 
   React.useEffect(async () => {
     var org = JSON.parse(localStorage.getItem("vh-org"));
-    const closedCaseCountData = await axios.get("http://35.154.87.215:3001/data/totalClosedCasesCount",{
+    const closedCaseCountData = await axios.get("http://3.6.32.110:3001/data/totalClosedCasesCount",{
       params: {
         onlyAccepted: true,
       }
@@ -37,7 +37,7 @@ function Header() {
 
   React.useEffect(async () => {
    var org = JSON.parse(localStorage.getItem("vh-org"));
-   const totalCaseCountData = await axios.get("http://35.154.87.215:3001/data/TotalCasesCount",{
+   const totalCaseCountData = await axios.get("http://3.6.32.110:3001/data/TotalCasesCount",{
      params: {
        onlyAccepted: true
      }
